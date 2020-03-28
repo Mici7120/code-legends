@@ -5,35 +5,19 @@
 #include <vector>
 using namespace std;
 
-//prueba branch
 class Ejercito{
-
-  /*
-  public:
-  Ejercito(int N_Luchadores, int N_Tiradores, int N_Magos);
-  void calcularEjercito();
-  int cantidadLuchadores, cantidadTiradores, cantidadMagos;
-
-  vector<Avatar> Luchadores;
-  vector<Avatar> Tiradores;
-  vector<Avatar> Magos;
-  /*
-
+  protected:
+    int cantidadLuchadores, cantidadTiradores, cantidadMagos, cantidadEjercito; 
+    vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar
   public: 
-    int cantidadLuchadores, cantidadTiradores, cantidadMagos, cantidadEjercito;
-    vector<Avatar*> ejercito; //avatar* es un vector de punteros a la clase avatar
-
-    Ejercito();
+  
+    Ejercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
     void calcularEjercito(); 
-    void setCantidadLuchadores(int numero);
     int getCantidadLuchadores();
-    void setCantidadTiradores(int numero);
     int getCantidadTiradores();
-    void setCantidadMagos(int numero);
     int getCantidadMagos();
     void setCantidadEjercito(int luchadores, int tiradores, int magos);
-    vector<Avatar*> getEjercito();// Obtener el ejercito
-  
+    vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar
 };
 
 #endif
