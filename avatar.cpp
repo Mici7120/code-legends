@@ -5,7 +5,7 @@
 // Para modificar la vida 
 
 
-Avatar::Avatar(string tipo){
+Avatar::Avatar(string tipo){ //tipo del avatae
   tipoAvatar = tipo;
   if(tipoAvatar=="luchador"){
     poder = 0.7;
