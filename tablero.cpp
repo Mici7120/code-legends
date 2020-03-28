@@ -16,10 +16,14 @@ void Tablero::Interfaz(){
       break;
 
       case 2:
+       //cout << "[1]" << endl;
       for(int x = 0; x<=9; x++){
         for(int y = 0; y<=9; y++){
+          //cout << "[2]" << endl;
           if(Puntero[x][y].tieneEjercito){
+            //cout << "[3]" << endl;
             Puntero[x][y].informacionEjercito();
+            //cout << "[4]" << endl;
           }
         }
       }
@@ -63,9 +67,9 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       int recorridoRenglon = 0;
       while(getline(configuracion, aux, '|')){
         if(stoi(aux) == 1 || stoi(aux) == 2){
-          Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito();
+          
           Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
-          recorridoRenglon++;
+
           int luchadores, tiradores, magos;
           cout << "Ingrese cantidad Luchadores: ";
           cin >> luchadores;
@@ -73,6 +77,8 @@ void Tablero::configurarPartida(int tipoConfiguracion){
           cin >> tiradores;
           cout << "Ingrese cantidad Magos: ";
           cin >> magos;
+          Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
+           recorridoRenglon++;
           Puntero[recorridoColumna][recorridoRenglon].setEjercito(luchadores, tiradores, magos);
         }else{
           Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
@@ -97,7 +103,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       int recorridoRenglon = 0;
       while(getline(configuracion, aux, '|')){
         if(stoi(aux) == 10 || stoi(aux) == 20){
-          Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito();
+          Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(0,0,0);
           Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
           recorridoRenglon++;
         }else{

@@ -37,6 +37,7 @@ void Menu::configurarPartida(int tipoConfiguracion){
   tableroGuardado.Interfaz();
 }
 
+//Carga las instrucciones del archivo "Instrucciones.txt"
 void Menu::Instrucciones(){
   string imprimirInstrucciones;
   ifstream archivoInstrucciones;

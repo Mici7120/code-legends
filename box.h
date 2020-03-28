@@ -7,6 +7,7 @@ using namespace std;
 
 class Box{
   public:
+  Ejercito *ejercito;
   Box();
   int ID;
   void setID(int id);
@@ -14,12 +15,11 @@ class Box{
 
   bool Torreta;
   bool tieneEjercito;
-  void setTieneEjercito();
+  void setTieneEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
   void setTorreta();
 
   void setEjercito(int NLuchadores, int NTiradores, int NMagos);
   void informacionEjercito();
-  Ejercito *ejercito;
 
 };
 
