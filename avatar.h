@@ -10,16 +10,7 @@ using namespace std;
 
 class Avatar{
 
-  /*public: 
-
-  Avatar();
-  void setTipo(string tipo);
-  string Tipo;
-  float Poder;
-  float Mana;
-  float Vida;
-
-  */protected:
+ protected:
     string tipoAvatar;
     float poder;
     float mana;
@@ -28,7 +19,6 @@ class Avatar{
   public:
     
     Avatar(string tipo);
-    //~ Avatar();
     void setVida(float nuevaVida); //Para modificar la vida
     string getTipoAvatar();
     float getPoder();
