@@ -1,7 +1,7 @@
 #include "avatar.h"
 
-
-Avatar::Avatar(string tipo){ //tipo del avatar
+//Dara las caracteristicas de cada tipo de avatar
+Avatar::Avatar(string tipo){
   tipoAvatar = tipo;
   if(tipoAvatar=="luchador"){
     poder = 0.7;
@@ -18,11 +18,12 @@ Avatar::Avatar(string tipo){ //tipo del avatar
   }
 }
 
+//Esta implementacion nos dara una nueva vida despues de que el avatar haya perdido sus puntos predeterminados
 void Avatar::setVida(float nuevaVida){
-  vida=vida-nuevaVida;
+  vida -= nuevaVida;
 }
 
-//Para saber de que tipo es el avatar
+//Esta implementacion nos dara el tipo de avatar
 string Avatar::getTipoAvatar(){
   return tipoAvatar;
 }
@@ -33,7 +34,6 @@ float Avatar::getPoder(){
 }
 
 //Para obtener el mana del avatar dependiendo del tipo
-
 float Avatar::getMana(){
   return mana;
 }
@@ -42,4 +42,3 @@ float Avatar::getMana(){
 float Avatar::getVida(){
   return vida;
 }
-

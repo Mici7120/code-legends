@@ -1,7 +1,6 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include "avatar.h"
 #include "ejercito.h"
 using namespace std;
 
@@ -17,13 +16,8 @@ class Box{
   bool tieneEjercito;
   void setTieneEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
   void setTorreta();
-  void torretaDestruida();
 
-  void setEjercito(int NLuchadores, int NTiradores, int NMagos);
   void informacionEjercito();
-
-  private:
-  int torreta = 4;
 
 };
 

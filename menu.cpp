@@ -12,19 +12,17 @@ void Menu::Interfaz(){
     cin >> opcion;
     switch(opcion){
      case 1:
-     cout << "\nNueva Partida:\n";
-     configurarPartida(0);
+     configurarPartida(opcion);
      break;
 
      case 2:
-     cout << "\nCargar Partida:\n";
-     configurarPartida(1);
+     configurarPartida(opcion);
      break;
 
      case 3:
-     cout << "\nInstrucciones:\n";
      Instrucciones();
      break;
+
      case 4:
      exit(1);
     }
@@ -33,8 +31,8 @@ void Menu::Interfaz(){
 }
 
 void Menu::configurarPartida(int tipoConfiguracion){
-  tableroGuardado.configurarPartida(tipoConfiguracion);
-  tableroGuardado.Interfaz();
+  tableroDeJuego -> configurarPartida(tipoConfiguracion);
+  tableroDeJuego -> Interfaz();
 }
 
 //Carga las instrucciones del archivo "Instrucciones.txt"
