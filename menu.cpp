@@ -12,15 +12,14 @@ void Menu::Interfaz(){
     cin >> opcion;
     switch(opcion){
      case 1:
-     configurarPartida(0);
+     configurarPartida(opcion);
      break;
 
      case 2:
-     configurarPartida(1);
+     configurarPartida(opcion);
      break;
 
      case 3:
-     cout << "\nInstrucciones:\n";
      Instrucciones();
      break;
 

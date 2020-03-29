@@ -18,5 +18,4 @@ int main() {
   Menu Menu;
   Menu.Interfaz();
 
-  return 0;
 }

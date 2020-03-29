@@ -1,7 +1,6 @@
 #ifndef BOX_H
 #define BOX_H
 
-#include "avatar.h"
 #include "ejercito.h"
 using namespace std;
 

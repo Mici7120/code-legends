@@ -16,14 +16,10 @@ void Tablero::Interfaz(){
       break;
 
       case 2:
-        cout << "[1]\t" << endl;
         for(int x = 0; x<=9; x++){
           for(int y = 0; y<=9; y++){
-            //cout << "[2]" << endl;
             if(Puntero[x][y].tieneEjercito){
-              //cout << "[3]" << endl;
               Puntero[x][y].informacionEjercito();
-              //cout << "[4]" << endl;
             }
           }
         }
@@ -36,6 +32,7 @@ void Tablero::Interfaz(){
 void Tablero::configurarPartida(int tipoConfiguracion){
   ifstream configuracion;
   int recorridoColumna = 0;
+  string aux;
   Puntero = new Box*[10];
   *Puntero = new Box[9];
   *(Puntero+1) = new Box[9];
@@ -50,7 +47,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
   *(Puntero+10) = new Box[9];
 
   switch (tipoConfiguracion){
-    case 0:
+    case 1:
       configuracion.open("nuevaPartida.txt");
       if(configuracion.fail()){
        cout << "\nNo se creo una nueva partida";
@@ -84,7 +81,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       configuracion.close();
     break;
 
-    case 1:
+    case 2:
       configuracion.open("nuevaPartida.txt");
       /*
       if(configuracion.fail()){
@@ -98,7 +95,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       int recorridoRenglon = 0;
         while(getline(configuracion, aux, '|')){
           if(stoi(aux) == 1 || stoi(aux) == 2){
-            /*
+            
             int luchadores, tiradores, magos;
             cout << "Ingrese cantidad Luchadores: ";
             cin >> luchadores;
@@ -108,7 +105,6 @@ void Tablero::configurarPartida(int tipoConfiguracion){
             cin >> magos;
             Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
             Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
-            */
             recorridoRenglon++;
           }else{
             Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
@@ -119,14 +115,10 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       }
       configuracion.close();
     break;
-
-    default:
-    cout << "malo";
   }
 }
 
 void Tablero::imprimirTablero(){
-
   for(int x = 0; x != 10; x++){
     for(int y = 0; y != 10; y++){
       cout << Puntero[x][y].getID() << " ";
