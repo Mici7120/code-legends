@@ -33,8 +33,8 @@ void Menu::Interfaz(){
 }
 
 void Menu::configurarPartida(int tipoConfiguracion){
-  tableroGuardado.configurarPartida(tipoConfiguracion);
-  tableroGuardado.Interfaz();
+  Tablero -> configurarPartida(tipoConfiguracion);
+  Tablero -> Interfaz();
 }
 
 //Carga las instrucciones del archivo "Instrucciones.txt"

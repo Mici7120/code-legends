@@ -102,7 +102,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       string aux;
       int recorridoRenglon = 0;
       while(getline(configuracion, aux, '|')){
-        if(stoi(aux) == 10 || stoi(aux) == 20){
+        if(stoi(aux) == 1 || stoi(aux) == 2){
           Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(0,0,0);
           Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
           recorridoRenglon++;
