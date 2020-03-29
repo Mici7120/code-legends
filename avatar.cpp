@@ -1,11 +1,7 @@
 #include "avatar.h"
 
 
-
-// Para modificar la vida 
-
-
-Avatar::Avatar(string tipo){ //tipo del avatae
+Avatar::Avatar(string tipo){ //tipo del avatar
   tipoAvatar = tipo;
   if(tipoAvatar=="luchador"){
     poder = 0.7;
