@@ -18,7 +18,6 @@ class Box{
   void setTieneEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
   void setTorreta();
 
-  void setEjercito(int NLuchadores, int NTiradores, int NMagos);
   void informacionEjercito();
 
 };

@@ -17,11 +17,6 @@ void Box::setTorreta(){
   Torreta = true;
 }
 
-void Box::setEjercito(int NLuchadores, int NTiradores, int NMagos){
-  //ejercito = new Ejercito(NLuchadores, NTiradores, NMagos);
-  
-  
-}
 
 void Box::informacionEjercito(){
   cout << "Estado Ejercito " << ID << endl;

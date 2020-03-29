@@ -3,13 +3,11 @@
 //Aqui cada cantidad de cada tipo de avatares(cantidadLuchadores,cantidadTiradores, cantidadMagos) guardara los valores que se introduciran en el ejercito ejemplo: 15 luchadores, 12 tiradores, 10 magos.
 Ejercito::Ejercito(int numeroLuchadores, int numeroTiradores, int numeroMagos){
 
-    cantidadLuchadores =numeroLuchadores; 
-    cantidadTiradores=numeroTiradores;
-    cantidadMagos=numeroMagos;
-    setCantidadEjercito( cantidadLuchadores,  cantidadTiradores, cantidadMagos);
+  cantidadLuchadores = numeroLuchadores;
+  cantidadTiradores = numeroTiradores;
+  cantidadMagos = numeroMagos;
+  setCantidadEjercito(cantidadLuchadores, cantidadTiradores, cantidadMagos);
   
-
-    
 } 
 
 //Esta implementacion no dara la cantidad total de los luchadores

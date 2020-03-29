@@ -13,7 +13,7 @@ class Menu{
   void Interfaz();
   void Instrucciones();
   void configurarPartida(int tipoConfiguracion);
-  Tablero *Tablero;
+  Tablero *tableroDeJuego;
 };
 
 #endif

@@ -11,7 +11,6 @@ class Tablero{
   Tablero();
   void Interfaz();
   void configurarPartida(int tipoConfiguracion);
-  void estadoEjercitos();
   void imprimirTablero();
   Box **Puntero;
 };

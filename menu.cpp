@@ -25,6 +25,7 @@ void Menu::Interfaz(){
      cout << "\nInstrucciones:\n";
      Instrucciones();
      break;
+
      case 4:
      exit(1);
     }
@@ -33,8 +34,8 @@ void Menu::Interfaz(){
 }
 
 void Menu::configurarPartida(int tipoConfiguracion){
-  Tablero -> configurarPartida(tipoConfiguracion);
-  Tablero -> Interfaz();
+  tableroDeJuego -> configurarPartida(tipoConfiguracion);
+  tableroDeJuego -> Interfaz();
 }
 
 //Carga las instrucciones del archivo "Instrucciones.txt"
