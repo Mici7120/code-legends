@@ -12,12 +12,10 @@ void Menu::Interfaz(){
     cin >> opcion;
     switch(opcion){
      case 1:
-     cout << "\nNueva Partida:\n";
      configurarPartida(0);
      break;
 
      case 2:
-     cout << "\nCargar Partida:\n";
      configurarPartida(1);
      break;
 

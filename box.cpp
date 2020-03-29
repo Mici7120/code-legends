@@ -25,9 +25,9 @@ void Box::informacionEjercito(){
   cout<< "Cantidad Magos: " << ejercito->getCantidadMagos() << endl << endl;
 }
   
-void Box::setTieneEjercito(int NLuchadores, int NTiradores, int NMagos){
+void Box::setTieneEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago){
   tieneEjercito = true;
-  ejercito = new Ejercito(NLuchadores, NTiradores, NMagos);
+  ejercito = new Ejercito(numeroLuchadores, numeroTiradores, numeroMago);
 }
 
 // Aqui debes hacer lo de sumas de habilidades, sin tocar la clase avatar ni la clase ejercito

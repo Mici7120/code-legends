@@ -16,19 +16,18 @@ void Tablero::Interfaz(){
       break;
 
       case 2:
-  cout << "[1]\t" << endl;
-  for(int x = 0; x<=9; x++){
-    for(int y = 0; y<=9; y++){
-    //cout << "[2]" << endl;
-      if(Puntero[x][y].tieneEjercito){
-        //cout << "[3]" << endl;
-        Puntero[x][y].informacionEjercito();
-        //cout << "[4]" << endl;
-      }
-    }
-  }
-  break;
-
+        cout << "[1]\t" << endl;
+        for(int x = 0; x<=9; x++){
+          for(int y = 0; y<=9; y++){
+            //cout << "[2]" << endl;
+            if(Puntero[x][y].tieneEjercito){
+              //cout << "[3]" << endl;
+              Puntero[x][y].informacionEjercito();
+              //cout << "[4]" << endl;
+            }
+          }
+        }
+      break;
     }
   }while(opcion != 3);
   delete[]Puntero;
@@ -37,7 +36,6 @@ void Tablero::Interfaz(){
 void Tablero::configurarPartida(int tipoConfiguracion){
   ifstream configuracion;
   int recorridoColumna = 0;
-
   Puntero = new Box*[10];
   *Puntero = new Box[9];
   *(Puntero+1) = new Box[9];
@@ -54,13 +52,11 @@ void Tablero::configurarPartida(int tipoConfiguracion){
   switch (tipoConfiguracion){
     case 0:
       configuracion.open("nuevaPartida.txt");
-      /*
       if(configuracion.fail()){
-       cout << "No se creo una nueva partida";
+       cout << "\nNo se creo una nueva partida";
       }else{
-      cout << "Se creo una nueva partida\n";
+      cout << "\nSe creo una nueva partida\n";
       }
-      */
       while(!configuracion.eof()){
       string aux;
       int recorridoRenglon = 0;

@@ -6,7 +6,7 @@ Ejercito::Ejercito(int numeroLuchadores, int numeroTiradores, int numeroMagos){
   cantidadLuchadores = numeroLuchadores;
   cantidadTiradores = numeroTiradores;
   cantidadMagos = numeroMagos;
-  setCantidadEjercito(cantidadLuchadores, cantidadTiradores, cantidadMagos);
+  setCantidadEjercito(numeroLuchadores, numeroTiradores, numeroMagos);
   
 } 
 
@@ -27,7 +27,6 @@ int Ejercito::getCantidadMagos(){
 
 
 //Setea el ejercito con el fin de modificar sus valores
-
 void Ejercito::setCantidadEjercito(int luchadores, int tiradores, int magos){
     ejercitoAvatar.clear();
     for(int cual = 0; cual < luchadores ; cual++){
