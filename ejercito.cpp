@@ -6,7 +6,9 @@ Ejercito::Ejercito(int numeroLuchadores, int numeroTiradores, int numeroMagos){
   cantidadLuchadores = numeroLuchadores;
   cantidadTiradores = numeroTiradores;
   cantidadMagos = numeroMagos;
+  /*
   setCantidadEjercito(numeroLuchadores, numeroTiradores, numeroMagos);
+  */
   
 } 
 

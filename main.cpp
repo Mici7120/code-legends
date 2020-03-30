@@ -2,7 +2,6 @@
 #include "ejercito.h"
 #include "box.h"
 #include "tablero.h"
-#include "coordenadas.h"
 #include "menu.h"
 
 int main() {
@@ -18,4 +17,5 @@ int main() {
   Menu Menu;
   Menu.Interfaz();
 
+  return 0;
 }
