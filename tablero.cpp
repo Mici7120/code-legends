@@ -8,17 +8,19 @@ void Tablero::Interfaz(){
 
   do{
 
-    cout << "\n1. ImprimirTablero\n2. Estado Ejercitos\n3. Salir al menu\n";
+    cout << "1. ImprimirTablero\n2. Estado Ejercitos\n3. Salir al menu\n";
     cin >> opcion;
     switch(opcion){
 
       //imprime el tablero
       case 1:
+      system("clear");
       imprimirTablero();
       break;
 
-    //Recorre la matriz e imprime la informacion de los ejercitos que contiene
+      //Recorre la matriz e imprime la informacion de los ejercitos que contiene
       case 2:
+      system("clear");
         for(int x = 0; x<=9; x++){
           for(int y = 0; y<=9; y++){
             if(Puntero[x][y].tieneEjercito){
@@ -30,6 +32,7 @@ void Tablero::Interfaz(){
 
     }
   }while(opcion != 3);
+  system("clear");
 
   delete[]Puntero;
 }
@@ -60,9 +63,9 @@ void Tablero::configurarPartida(int tipoConfiguracion){
       //Se cargara la matriz desde el archivo "nuevaPartida.txt"
       configuracion.open("nuevaPartida.txt");
       if(configuracion.fail()){
-       cout << "\nNo se creo una nueva partida";
+       cout << "No se creo una nueva partida";
       }else{
-        cout << "\nSe creo una nueva partida\n";
+        cout << "Se creo una nueva partida\n\n";
       }
       while(!configuracion.eof()){
         string aux;
@@ -78,6 +81,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
             cin >> tiradores;
             cout << "Ingrese cantidad Magos: ";
             cin >> magos;
+            cout << endl;
             Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
             //Se configura el Box con la cantidad de avatares de cada tipo
             Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
@@ -98,7 +102,7 @@ void Tablero::configurarPartida(int tipoConfiguracion){
     if(configuracion.fail()){
      cout << "No se encontro partida guardada";
     }else{
-      cout << "Se cargo una partida\n";
+      cout << "Se cargo una partida\n\n";
     }
 
     while(!configuracion.eof()){

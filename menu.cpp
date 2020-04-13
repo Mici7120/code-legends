@@ -8,22 +8,34 @@ void Menu::Interfaz(){
   int opcion;
 
   do{
+    //Imprimir titulo Code Legends
+    string imprimirTitulo;
+    ifstream Titulo;
+    Titulo.open("Titulo.txt");
+    while(getline(Titulo, imprimirTitulo)){
+      cout << imprimirTitulo << endl;
+    }
+    Titulo.close();
+    
     cout << "\n1. Nueva Partida\n2. Cargar Partida\n3. Instrucciones\n4. Exit\n";
     cin >> opcion;
     switch(opcion){
 
     //configura el tablero para una nueva partida
      case 1:
+     system("clear");
      configurarPartida(0);
      break;
 
     //configura el tablero para que carge una partida
      case 2:
+     system("clear");
      configurarPartida(1);
      break;
 
     //imprima las instrucciones
      case 3:
+     system("clear");
      Instrucciones();
      break;
 
