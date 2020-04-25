@@ -24,13 +24,17 @@ void Menu::MenuPrincipal(){
     //configura el tablero para una nueva partida
      case 1:
      system("clear");
-     configurarPartida(0);
+     Partida = new JuegoBase("nuevaPartida");
+     Partida -> Main();
+     delete Partida;
      break;
 
     //configura el tablero para que carge una partida
      case 2:
      system("clear");
-     configurarPartida(1);
+     Partida = new JuegoBase("cargarPartida");
+     Partida -> Main();
+     delete Partida;
      break;
 
     //imprima las instrucciones
@@ -46,11 +50,6 @@ void Menu::MenuPrincipal(){
   while(opcion != 4);
 }
 
-//Se configura el tablero al estado deseado y luego muestra la interfaz para imprimir tablero o mostrar estado ejercito
-void Menu::configurarPartida(int tipoConfiguracion){
-  tableroDeJuego.configurarPartida(tipoConfiguracion);
-  tableroDeJuego.Interfaz();
-}
 
 //Carga las instrucciones del archivo "Instrucciones.txt"
 void Menu::Instrucciones(){

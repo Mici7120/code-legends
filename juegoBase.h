@@ -9,9 +9,14 @@ using namespace std;
 
 class JuegoBase{
   public:
-  JuegoBase();
+  JuegoBase(string configuracionPartida);
   void Main();
+  void configurarNuevaPartida();
+  void configurarCargarPartida();
   void sorteoTurno();
+
+  int primerTurno;
+  Tablero *tableroDeJuego;
 };
 
 #endif

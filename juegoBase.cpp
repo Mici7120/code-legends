@@ -1,24 +1,45 @@
 #include "juegoBase.h"
 
-JuegoBase::JuegoBase(){
-
-}
-void JuegoBase::Main(){
-  sorteoTurno();
-  int opcion = 0;
-  while(opcion != 5){
-
+JuegoBase::JuegoBase(string configuracionPartida){
+  if(configuracionPartida == "nuevaPartida"){
+    configurarNuevaPartida();
+  }else{
+    configurarCargarPartida();
   }
 }
 
+void JuegoBase::configurarNuevaPartida(){
+  tableroDeJuego = new Tablero("nuevaPartida");
+  sorteoTurno();
+}
+
+void JuegoBase::configurarCargarPartida(){
+  tableroDeJuego = new Tablero("cargarPartida");
+}
+
+void JuegoBase::Main(){
+  int opcion = 1;
+  do{
+    system("clear");
+    tableroDeJuego -> imprimirTablero();
+    cout << "\n0.  Exit\n";
+    cin >> opcion;
+  }while(opcion != 0);
+  system("clear");
+}
+
 void JuegoBase::sorteoTurno(){
-  cout << "Lanzando moneda para decidir turno"
-  srand(time(NULL));
+  cout << "Lanzando moneda para decidir turno\n";
   
-  cout << "Empieza el jugador " << rand()%2 << endl;
+  do{
+    srand(time(NULL));
+    primerTurno = rand()%2;
+  }while(primerTurno == 0);
+
+  cout << "Empieza el jugador " << primerTurno << endl;
   int opcion = 0;
   while(opcion != 1){
-  cout << "\n1. Continuar\n";
+    cout << "\n1. Continuar\n";
     cin >> opcion;
   }
 }

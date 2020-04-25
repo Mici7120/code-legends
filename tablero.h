@@ -6,11 +6,13 @@ using namespace std;
 
 class Tablero{
   public:
-  Tablero();
-  void Interfaz();
-  void configurarPartida(int tipoConfiguracion);
+  Tablero(string configurarTablero);
+  void nuevaPartida();
+  void cargarPartida();
   void imprimirTablero();
-  Box **tablero;
+  Box **matrizTablero;
+  Box *Ejercito1;
+  Box *Ejercito2;
 };
 
 #endif
