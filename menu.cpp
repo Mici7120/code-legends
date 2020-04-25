@@ -4,7 +4,7 @@ Menu::Menu(){
   
 }
 
-void Menu::Interfaz(){
+void Menu::MenuPrincipal(){
   int opcion;
 
   do{
@@ -61,4 +61,11 @@ void Menu::Instrucciones(){
     cout << imprimirInstrucciones << endl;
   }
   archivoInstrucciones.close();
+
+  int opcion = 0;
+  while(opcion != 1){
+    cout << "\n1. Salir al Menu\n";
+    cin >> opcion;
+  }
+  system("clear");
 }

@@ -10,7 +10,7 @@ class Tablero{
   void Interfaz();
   void configurarPartida(int tipoConfiguracion);
   void imprimirTablero();
-  Box **Puntero;
+  Box **tablero;
 };
 
 #endif

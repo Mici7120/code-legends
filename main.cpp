@@ -7,7 +7,7 @@
 int main() {
   
   Menu Menu;
-  Menu.Interfaz();
+  Menu.MenuPrincipal();
 
   return 0;
 }

@@ -23,8 +23,8 @@ void Tablero::Interfaz(){
       system("clear");
         for(int x = 0; x<=9; x++){
           for(int y = 0; y<=9; y++){
-            if(Puntero[x][y].tieneEjercito){
-              Puntero[x][y].informacionEjercito();
+            if(tablero[x][y].tieneEjercito){
+              tablero[x][y].informacionEjercito();
             }
           }
         }
@@ -34,7 +34,6 @@ void Tablero::Interfaz(){
   }while(opcion != 3);
   system("clear");
 
-  delete[]Puntero;
 }
 
 void Tablero::configurarPartida(int tipoConfiguracion){
@@ -42,21 +41,13 @@ void Tablero::configurarPartida(int tipoConfiguracion){
   int recorridoColumna = 0;
   string aux;
 
-  //Al puntero le agregamos un array de 10 objetos Box
-  Puntero = new Box*[10];
+  //Al puntero le agregamos un array de 10 punteros tipo Box
+  tablero = new Box*[10];
 
-  //A cada uno de las posiciones del array, le agregamos otro array de 9 objetos Box, para completar la matriz
-  *Puntero = new Box[9];
-  *(Puntero+1) = new Box[9];
-  *(Puntero+2) = new Box[9];
-  *(Puntero+3) = new Box[9];
-  *(Puntero+4) = new Box[9];
-  *(Puntero+5) = new Box[9];
-  *(Puntero+6) = new Box[9];
-  *(Puntero+7) = new Box[9];
-  *(Puntero+8) = new Box[9];
-  *(Puntero+9) = new Box[9];
-  *(Puntero+10) = new Box[9];
+  //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
+  for(int i = 0; i <= 9 ; i++){
+    *(tablero + i) = new Box[9];
+  }
 
   switch (tipoConfiguracion){
     case 0:
@@ -82,12 +73,12 @@ void Tablero::configurarPartida(int tipoConfiguracion){
             cout << "Ingrese cantidad Magos: ";
             cin >> magos;
             cout << endl;
-            Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+            tablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
             //Se configura el Box con la cantidad de avatares de cada tipo
-            Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
+            tablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
             recorridoRenglon++;
           }else{
-            Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+            tablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
             recorridoRenglon++;
           }
       }
@@ -110,11 +101,11 @@ void Tablero::configurarPartida(int tipoConfiguracion){
     int recorridoRenglon = 0;
     while(getline(configuracion, aux, '|')){
       if(stoi(aux) == 1 || stoi(aux) == 2){
-        Puntero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
-        Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+        tablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
+        tablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         recorridoRenglon++;
       }else{
-        Puntero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+        tablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         recorridoRenglon++;
       }
     }
@@ -129,9 +120,9 @@ void Tablero::configurarPartida(int tipoConfiguracion){
 
 //Recorre la matriz del tablero e imprime sus valores, "1" para ejercito 1, "2" para ejercito 2 y "9" para la torreta.
 void Tablero::imprimirTablero(){
-  for(int x = 0; x != 10; x++){
-    for(int y = 0; y != 10; y++){
-      cout << Puntero[x][y].getID() << " ";
+  for(int x = 0; x <= 9; x++){
+    for(int y = 0; y <= 9; y++){
+      cout << tablero[x][y].getID() << " ";
     }
     cout << endl;
   }
