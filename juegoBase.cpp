@@ -26,6 +26,8 @@ void JuegoBase::Main(){
     cin >> opcion;
   }while(opcion != 0);
   system("clear");
+  //llamar el destructor de tablero
+  delete tableroDeJuego;
 }
 
 void JuegoBase::sorteoTurno(){
@@ -33,7 +35,7 @@ void JuegoBase::sorteoTurno(){
   
   do{
     srand(time(NULL));
-    primerTurno = rand()%2;
+    primerTurno = rand()%3;
   }while(primerTurno == 0);
 
   cout << "Empieza el jugador " << primerTurno << endl;

@@ -63,7 +63,7 @@ void Menu::Instrucciones(){
 
   int opcion = 0;
   while(opcion != 1){
-    cout << "\n1. Salir al Menu\n";
+    cout << "\n1. Exit\n";
     cin >> opcion;
   }
   system("clear");

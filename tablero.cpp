@@ -16,6 +16,15 @@ Tablero::Tablero(string configurarTablero){
   }
 }
 
+Tablero::~Tablero(){
+  delete Ejercito1;
+  delete Ejercito2;
+  for(int i = 0; i <= 9; i++){
+    delete []matrizTablero[i];
+  }
+  delete []matrizTablero;
+}
+
 void Tablero::nuevaPartida(){
   ifstream configuracion;
   int recorridoColumna = 0;
