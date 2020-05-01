@@ -27,7 +27,7 @@ void JuegoBase::Main(){
   }while(opcion != 0);
   system("clear");
   //llamar el destructor de tablero
-  delete tableroDeJuego;
+  //delete tableroDeJuego;
 }
 
 void JuegoBase::sorteoTurno(){

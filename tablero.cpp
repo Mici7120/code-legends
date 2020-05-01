@@ -81,11 +81,6 @@ void Tablero::cargarPartida(){
 
   //Se cargara la matriz desde el archivo "cargarPartida.txt"
   configuracion.open("cargarPartida.txt");
-  if(configuracion.fail()){
-   cout << "No se encontro partida guardada";
-  }else{
-    cout << "Se cargo una partida\n\n";
-  }
 
   while(!configuracion.eof()){
   string aux;
@@ -111,8 +106,8 @@ void Tablero::cargarPartida(){
 void Tablero::imprimirTablero(){
   for(int x = 0; x <= 9; x++){
     for(int y = 0; y <= 9; y++){
-      cout << matrizTablero[x][y].getID() << " ";
+      cout << matrizTablero[x][y].getID() << "\t";
     }
-    cout << endl;
+    cout << endl << endl;
   }
 }
