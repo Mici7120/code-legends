@@ -4,7 +4,7 @@ Menu::Menu(){
   
 }
 
-void Menu::Interfaz(){
+void Menu::MenuPrincipal(){
   int opcion;
 
   do{
@@ -24,13 +24,17 @@ void Menu::Interfaz(){
     //configura el tablero para una nueva partida
      case 1:
      system("clear");
-     configurarPartida(0);
+     Partida = new JuegoBase("nuevaPartida");
+     Partida -> Main();
+     delete Partida;
      break;
 
     //configura el tablero para que carge una partida
      case 2:
      system("clear");
-     configurarPartida(1);
+     Partida = new JuegoBase("cargarPartida");
+     Partida -> Main();
+     delete Partida;
      break;
 
     //imprima las instrucciones
@@ -46,11 +50,6 @@ void Menu::Interfaz(){
   while(opcion != 4);
 }
 
-//Se configura el tablero al estado deseado y luego muestra la interfaz para imprimir tablero o mostrar estado ejercito
-void Menu::configurarPartida(int tipoConfiguracion){
-  tableroDeJuego.configurarPartida(tipoConfiguracion);
-  tableroDeJuego.Interfaz();
-}
 
 //Carga las instrucciones del archivo "Instrucciones.txt"
 void Menu::Instrucciones(){
@@ -61,4 +60,11 @@ void Menu::Instrucciones(){
     cout << imprimirInstrucciones << endl;
   }
   archivoInstrucciones.close();
+
+  int opcion = 0;
+  while(opcion != 1){
+    cout << "\n1. Exit\n";
+    cin >> opcion;
+  }
+  system("clear");
 }

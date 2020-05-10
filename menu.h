@@ -5,15 +5,14 @@
 #include "ejercito.h"
 #include "box.h"
 #include "tablero.h"
-using namespace std;
+#include "juegoBase.h"
 
 class Menu{
   public:
   Menu();
-  void Interfaz();
+  void MenuPrincipal();
   void Instrucciones();
-  void configurarPartida(int tipoConfiguracion);
-  Tablero tableroDeJuego;
+  JuegoBase *Partida;
 };
 
 #endif
