@@ -12,8 +12,8 @@ class Tablero{
   void cargarPartida();
   void imprimirTablero();
   Box **matrizTablero;
-  Box *Ejercito1;
-  Box *Ejercito2;
+
+  int Ejercito1X, Ejercito1Y, Ejercito2X, Ejercito2Y;
 };
 
 #endif

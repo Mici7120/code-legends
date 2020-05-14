@@ -12,7 +12,7 @@ class Menu{
   Menu();
   void MenuPrincipal();
   void Instrucciones();
-  JuegoBase *Partida;
+  JuegoBase Partida;
 };
 
 #endif

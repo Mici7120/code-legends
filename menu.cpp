@@ -24,17 +24,15 @@ void Menu::MenuPrincipal(){
     //configura el tablero para una nueva partida
      case 1:
      system("clear");
-     Partida = new JuegoBase("nuevaPartida");
-     Partida -> Main();
-     delete Partida;
+     Partida.Main("nuevaPartida");
+     //delete Partida;
      break;
 
     //configura el tablero para que carge una partida
      case 2:
      system("clear");
-     Partida = new JuegoBase("cargarPartida");
-     Partida -> Main();
-     delete Partida;
+     Partida.Main("cargarPartida");
+     //delete Partida;
      break;
 
     //imprima las instrucciones

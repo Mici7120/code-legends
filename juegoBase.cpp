@@ -1,11 +1,6 @@
 #include "juegoBase.h"
 
-JuegoBase::JuegoBase(string configuracionPartida){
-  if(configuracionPartida == "nuevaPartida"){
-    configurarNuevaPartida();
-  }else{
-    configurarCargarPartida();
-  }
+JuegoBase::JuegoBase(){
 }
 
 void JuegoBase::configurarNuevaPartida(){
@@ -17,7 +12,12 @@ void JuegoBase::configurarCargarPartida(){
   tableroDeJuego = new Tablero("cargarPartida");
 }
 
-void JuegoBase::Main(){
+void JuegoBase::Main(string configuracionPartida){
+  if(configuracionPartida == "nuevaPartida"){
+    configurarNuevaPartida();
+  }else{
+    configurarCargarPartida();
+  }
   int opcion = 1;
   do{
     system("clear");

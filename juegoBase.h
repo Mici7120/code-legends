@@ -9,8 +9,8 @@ using namespace std;
 
 class JuegoBase{
   public:
-  JuegoBase(string configuracionPartida);
-  void Main();
+  JuegoBase();
+  void Main(string configuracionPartida);
   void configurarNuevaPartida();
   void configurarCargarPartida();
   void sorteoTurno();

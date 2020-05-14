@@ -2,7 +2,7 @@
 
 Tablero::Tablero(string configurarTablero){
   //Al puntero le agregamos un array de 10 punteros tipo Box
-  matrizTablero = new Box*[10];
+  matrizTablero = new Box*[9];
 
   //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
   for(int i = 0; i <= 9 ; i++){
@@ -17,8 +17,6 @@ Tablero::Tablero(string configurarTablero){
 }
 
 Tablero::~Tablero(){
-  delete Ejercito1;
-  delete Ejercito2;
   for(int i = 0; i <= 9; i++){
     delete []matrizTablero[i];
   }
@@ -57,18 +55,20 @@ void Tablero::nuevaPartida(){
         matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
         recorridoRenglon++;
 
-        //Guarda la direccion de los ejercitos
+        //Guarda las coordenadas de los ejercitos
         if(stoi(aux) == 1){
-        Ejercito1 = &matrizTablero[recorridoColumna][recorridoRenglon];
+          Ejercito1X = recorridoColumna;
+          Ejercito1Y = recorridoRenglon;
         }else{
-          Ejercito2 = &matrizTablero[recorridoColumna][recorridoRenglon];
+          Ejercito2X = recorridoColumna;
+          Ejercito2Y = recorridoRenglon;
         }
 
       }else{
         matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         recorridoRenglon++;
       }
-  }
+    }
   recorridoColumna ++;
   }
   configuracion.close();
