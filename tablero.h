@@ -14,6 +14,7 @@ class Tablero{
   Box **matrizTablero;
 
   int Ejercito1X, Ejercito1Y, Ejercito2X, Ejercito2Y;
+  void setCoordenadasEjercito(int _Ejercito, int X, int Y);
 };
 
 #endif

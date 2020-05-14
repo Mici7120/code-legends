@@ -53,17 +53,10 @@ void Tablero::nuevaPartida(){
         matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         //Se configura el Box con la cantidad de avatares de cada tipo
         matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
-        recorridoRenglon++;
 
         //Guarda las coordenadas de los ejercitos
-        if(stoi(aux) == 1){
-          Ejercito1X = recorridoColumna;
-          Ejercito1Y = recorridoRenglon;
-        }else{
-          Ejercito2X = recorridoColumna;
-          Ejercito2Y = recorridoRenglon;
-        }
-
+        setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
+        recorridoRenglon++;
       }else{
         matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         recorridoRenglon++;
@@ -87,8 +80,11 @@ void Tablero::cargarPartida(){
   int recorridoRenglon = 0;
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
-      matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
       matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+      //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
+
+      //Guarda las coordenadas de los ejercitos
+      setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
       recorridoRenglon++;
     }else{
       matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
@@ -109,5 +105,15 @@ void Tablero::imprimirTablero(){
       cout << matrizTablero[x][y].getID() << "\t";
     }
     cout << endl << endl;
+  }
+}
+
+void Tablero::setCoordenadasEjercito(int _Ejercito, int X, int Y){
+  if(_Ejercito == 1){
+    Ejercito1Y = X % 10;
+    Ejercito1X = X / 10;
+  }else{
+    Ejercito2Y = X % 10;
+    Ejercito2X = X / 10;
   }
 }
