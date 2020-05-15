@@ -9,11 +9,12 @@ using namespace std;
 class Ejercito{
   public: 
   //Seran los metodos que nos servira para dar la cantidad total de cada tipo de avatar y de igual forma nos dara la suma total de cada ejercito de avatares.
-    Ejercito(int numeroLuchadores, int numeroTiradores, int numeroMagos);
-    int getCantidadLuchadores();
-    int getCantidadTiradores();
-    int getCantidadMagos();
+    Ejercito();
+    void getCantidadLuchadores();
+    void getCantidadTiradores();
+    void getCantidadMagos();
     int soldadosVivos();
+    
     bool derrotado();
     void operator / (Ejercito atacado);
     void restarVida(float vidaPerdida);
@@ -21,10 +22,9 @@ class Ejercito{
     double sumaMana();
     void setCantidadEjercito(int luchadores, int tiradores, int magos);
     vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar.
-  protected:
-    int cantidadLuchadores, cantidadTiradores, cantidadMagos, cantidadEjercito; 
     vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar.
   
+    int cantidadEjercito;
     double poderTotal;
     double manaTotal;
 };

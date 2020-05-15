@@ -49,10 +49,11 @@ void Tablero::nuevaPartida(){
         cin >> tiradores;
         cout << "Ingrese cantidad Magos: ";
         cin >> magos;
+
         cout << endl;
         matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         //Se configura el Box con la cantidad de avatares de cada tipo
-        matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
+        //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
 
         //Guarda las coordenadas de los ejercitos
         setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
@@ -85,7 +86,7 @@ void Tablero::cargarPartida(){
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
       matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
-      matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
+      //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
 
       //Guarda las coordenadas de los ejercitos
       setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
