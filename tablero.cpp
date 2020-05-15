@@ -57,6 +57,10 @@ void Tablero::nuevaPartida(){
         //Guarda las coordenadas de los ejercitos
         setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
         recorridoRenglon++;
+      }else if(stoi(aux) == 9){
+        matrizTablero[recorridoColumna][recorridoRenglon].setTorreta();
+        matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+        recorridoRenglon++;
       }else{
         matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
         recorridoRenglon++;
@@ -81,10 +85,14 @@ void Tablero::cargarPartida(){
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
       matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
-      //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
+      matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(stoi(aux), stoi(aux), stoi(aux));
 
       //Guarda las coordenadas de los ejercitos
       setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
+      recorridoRenglon++;
+    }else if (stoi(aux) == 9){
+      matrizTablero[recorridoColumna][recorridoRenglon].setTorreta();
+      matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
       recorridoRenglon++;
     }else{
       matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
@@ -96,7 +104,6 @@ void Tablero::cargarPartida(){
   //Se cierra el archivo plano
   configuracion.close();
 }
-
 
 //Recorre la matriz del tablero e imprime sus valores, "1" para ejercito 1, "2" para ejercito 2 y "9" para la torreta.
 void Tablero::imprimirTablero(){
