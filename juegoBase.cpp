@@ -63,37 +63,46 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
     switch (opcionMovimiento){
       case 1: //Arriba
       if(coordeX != 0){
-        tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
-        tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
-        coordeX --;
-        movimientoCorrecto = true;
+        if(tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].Torreta == false){
+          tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          coordeX --;
+          movimientoCorrecto = true;
+        }
       }
       break;
 
       case 2: //Abajo
       if(coordeX != 9){
-        tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
-        tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
-        coordeX ++;
-        movimientoCorrecto = true;
+        if(tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].Torreta == false){
+          tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
+          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          coordeX ++;
+          movimientoCorrecto = true;
+        }
       }
       break;
 
       case 3: //Derecha
       if(coordeY != 9){
-        tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
-        tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
-        coordeY ++;
-        movimientoCorrecto = true;
+        //Verifica si la posicion a moverse esta la torreta
+        if(tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].Torreta == false){
+          tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
+          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          coordeY ++;
+          movimientoCorrecto = true;
+        }
       }
       break;
 
       case 4: //Izquierda
       if(coordeY != 0){
-        tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
-        tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
-        coordeY -- ;
-        movimientoCorrecto = true;
+        if(tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].Torreta == false){
+          tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
+          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          coordeY -- ;
+          movimientoCorrecto = true;
+        }
       }
       break;
 
