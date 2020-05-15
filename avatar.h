@@ -12,13 +12,12 @@ using namespace std;
 class Avatar{
 
 //Atributos principales de los avatares
- protected:
+  public:
     string tipoAvatar;
     float poder;
     float mana;
     float vida; 
 
-  public:
     
     Avatar(string tipo);
     void setVida(float nuevaVida); //Para modificar la vida

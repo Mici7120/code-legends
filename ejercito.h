@@ -16,8 +16,9 @@ class Ejercito{
     int soldadosVivos();
     bool derrotado();
     void operator / (Ejercito atacado);
-    void sumaPoder();
-    void sumaMana();
+    void restarVida(float vidaPerdida);
+    double sumaPoder();
+    double sumaMana();
     void setCantidadEjercito(int luchadores, int tiradores, int magos);
     vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar.
   protected:

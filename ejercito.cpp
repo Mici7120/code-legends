@@ -59,7 +59,7 @@ vector<Avatar*> Ejercito::getEjercito(){ //cree un nuevo tipo el cual es: vector
     return numeroDeSoldados;
 }
 
-//Indica si el ejercito ha sido derrotado.
+//Indica si el ejercito ha sido destruido.
   bool Ejercito::derrotado(){
     if(soldadosVivos() <= 0){
       return true;
@@ -69,27 +69,71 @@ vector<Avatar*> Ejercito::getEjercito(){ //cree un nuevo tipo el cual es: vector
 }
 
 //Suma los puntos de poder del ejercito.
-void Ejercito::sumaPoder(){
+double Ejercito::sumaPoder(){
     int poderTotal = 0;
     for(int i = 0; i <= (cantidadEjercito); i++){
       if(ejercitoAvatar[i] -> poder >= 0){
         poderTotal += ejercitoAvatar[i] -> poder;
     }
   }
+
+  return poderTotal;
 }
 
 //Suma los puntos de mana del ejercito.
-void Ejercito::sumaMana(){
+double Ejercito::sumaMana(){
     int manaTotal = 0;
     for(int i = 0; i <= (cantidadEjercito); i++){
       if(ejercitoAvatar[i] -> mana >= 0){
         manaTotal += ejercitoAvatar[i] -> mana;
+      }
+    }
+  return manaTotal;
+}
+
+void Ejercito::restarVida(float vidaPerdida){
+  int i = 0;
+  vector<Avatar*>::iterator iterator;
+  iterator = ejercitoAvatar.begin();
+  while(ejercitoAvatar[i] -> getTipoAvatar() != "mago" || iterator != ejercitoAvatar.end()){
+    i ++;
+    iterator ++;
+  }
+  if(ejercitoAvatar[i] -> getTipoAvatar() != "mago"){
+    ejercitoAvatar[i] -> setVida(vidaPerdida);
+  }else{
+    i = 0;
+    iterator = ejercitoAvatar.begin();
+    while(ejercitoAvatar[i] -> getTipoAvatar() != "luchador" || iterator != ejercitoAvatar.end()){
+    i ++;
+    iterator ++;
+    }
+    if(ejercitoAvatar[i] -> getTipoAvatar() != "luchador"){
+      ejercitoAvatar[i] -> setVida(vidaPerdida);
+    }else{
+      i = 0;
+      iterator = ejercitoAvatar.begin();
+      while(ejercitoAvatar[i] -> getTipoAvatar() != "tirador" || iterator != ejercitoAvatar.end()){
+        i ++;
+        iterator ++;
+      }
+      if(ejercitoAvatar[i] -> getTipoAvatar() != "tirador"){
+        ejercitoAvatar[i] -> setVida(vidaPerdida);
+      }
     }
   }
 }
 
-//Recibe al ejercito atacante eh inicia el combate.
-void Ejercito::operator / (Ejercito ejercitoAtacado){
-  int soldadoAtacante = 0;
-  int soldadoAtacado = 0;
+
+//Recibe al otro Ejercito y hace el combate
+  void Ejercito::operator / (Ejercito ejercitoAtacado){
+
+  if(sumaPoder() > ejercitoAtacado.sumaMana()){
+    ejercitoAtacado.restarVida(.5);
+  }else if(sumaPoder() < ejercitoAtacado.sumaMana()){
+    restarVida(.5);
+  }else{
+    ejercitoAtacado.restarVida(.2);
+    restarVida(.2);
+  }
 }
