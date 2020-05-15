@@ -1,5 +1,5 @@
 #ifndef EJERCITO_H
-#define EJERCITO_H //Guardas
+#define EJERCITO_H //Guardas.
 
 #include "avatar.h"
 #include <vector>
@@ -13,11 +13,19 @@ class Ejercito{
     int getCantidadLuchadores();
     int getCantidadTiradores();
     int getCantidadMagos();
+    int soldadosVivos();
+    bool derrotado();
+    void operator / (Ejercito atacado);
+    void sumaPoder();
+    void sumaMana();
     void setCantidadEjercito(int luchadores, int tiradores, int magos);
-    vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar
+    vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar.
   protected:
     int cantidadLuchadores, cantidadTiradores, cantidadMagos, cantidadEjercito; 
-    vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar
+    vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar.
+  
+    double poderTotal;
+    double manaTotal;
 };
 
 #endif
