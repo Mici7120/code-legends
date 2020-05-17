@@ -6,8 +6,9 @@ using namespace std;
 
 class Tablero{
   public:
-  Tablero(string configurarTablero);
+  Tablero();
   ~Tablero();
+  void setMatrizTablero();
   void nuevaPartida();
   void cargarPartida();
   void imprimirTablero();

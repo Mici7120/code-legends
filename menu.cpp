@@ -8,6 +8,7 @@ void Menu::MenuPrincipal(){
   int opcion;
 
   do{
+    system("clear");
     //Imprimir titulo Code Legends
     string imprimirTitulo;
     ifstream Titulo;
