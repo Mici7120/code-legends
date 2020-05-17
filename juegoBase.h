@@ -17,7 +17,7 @@ class JuegoBase{
   void Movimiento(int _Ejercito, int &coordeX, int &coordeY);
 
   int Turno;
-  Tablero *tableroDeJuego;
+  Tablero tableroDeJuego;
 };
 
 #endif

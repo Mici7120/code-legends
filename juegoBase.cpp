@@ -4,12 +4,12 @@ JuegoBase::JuegoBase(){
 }
 
 void JuegoBase::configurarNuevaPartida(){
-  tableroDeJuego = new Tablero("nuevaPartida");
+  tableroDeJuego.nuevaPartida();
   sorteoTurno();
 }
 
 void JuegoBase::configurarCargarPartida(){
-  tableroDeJuego = new Tablero("cargarPartida");
+  tableroDeJuego.cargarPartida();
   Turno = 1;
 }
 
@@ -23,14 +23,13 @@ void JuegoBase::Main(string configuracionPartida){
 
   do{
     system("clear");
-    tableroDeJuego -> imprimirTablero();
-
+    tableroDeJuego.imprimirTablero();
     cout << "Turno del Jugador " << Turno << endl;
     if (Turno == 1){
-      Movimiento(Turno, tableroDeJuego -> Ejercito1X, tableroDeJuego -> Ejercito1Y);
+      Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
       Turno = 2;
     }else{
-      Movimiento(Turno, tableroDeJuego -> Ejercito2X, tableroDeJuego -> Ejercito2Y);
+      Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
       Turno = 1;
     }
   }while(opcion != 0);
@@ -63,22 +62,22 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
     switch (opcionMovimiento){
       case 1: //Arriba
       if(coordeX != 0){
-        switch(tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
           case 0:
-          tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeX --;
           movimientoCorrecto = true;
           break;
 
           case 1:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].ejercito;
+          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
           movimientoCorrecto = true;
           break;
 
           case 2:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX - 1][coordeY].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 9:
@@ -93,22 +92,22 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 2: //Abajo
       if(coordeX != 9){
-        switch(tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].getID()){
           case 0:
-          tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeX ++;
           movimientoCorrecto = true;
           break;
 
           case 1:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 2:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX + 1][coordeY].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 9:
@@ -123,22 +122,22 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 3: //Derecha
       if(coordeY != 9){
-        switch(tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].getID()){
           case 0:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeY ++;
           movimientoCorrecto = true;
           break;
 
           case 1:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 2:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX][coordeY + 1].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 9:
@@ -153,22 +152,22 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 4: //Izquierda
       if(coordeY != 0){
-        switch(tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
           case 0:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeY --;
           movimientoCorrecto = true;
           break;
 
           case 1:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 2:
-          tableroDeJuego -> matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego -> matrizTablero[coordeX][coordeY - 1].ejercito;
-          movimientoCorrecto = true;
+          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
+          //movimientoCorrecto = true;
           break;
 
           case 9:
@@ -186,7 +185,6 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
     }
   if(movimientoCorrecto == false){
     cout << "Movimiento Invalido\n";
-  }
-
+    }
   }
 }

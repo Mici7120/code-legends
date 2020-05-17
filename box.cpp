@@ -1,6 +1,7 @@
 #include "box.h"
 
 Box::Box(){
+  ID = 0;
   Torreta = false;
 }
 
