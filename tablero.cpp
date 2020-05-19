@@ -25,8 +25,8 @@ void Tablero::nuevaPartida(){
   ifstream configuracion;
   configuracion.open("nuevaPartida.txt");
 
-  int recorridoRenglon = 0;
-  int recorridoColumna = 0;
+  int coordenadasX = 0;
+  int coordenadasY = 0;
   string aux;
 
   while(getline(configuracion, aux, '|')){
@@ -42,23 +42,23 @@ void Tablero::nuevaPartida(){
       cin >> magos;
       cout << endl;
       
-      matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
       //Se configura la cantidad de avatares de cada tipo en el Box
-      //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(luchadores, tiradores, magos);
+      matrizTablero[coordenadasX][coordenadasY].setEjercito(luchadores, tiradores, magos);
 
       //Guarda las coordenadas de los ejercitos
-      setCoordenadasEjercito(stoi(aux), recorridoRenglon, recorridoColumna);
+      setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
     }else{
-      matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
       if(stoi(aux) == 9){
-        matrizTablero[recorridoColumna][recorridoRenglon].setTorreta();
+        matrizTablero[coordenadasX][coordenadasY].setTorreta();
         }
     }
-    if(recorridoRenglon == 9){
-      recorridoRenglon = 0;
-      recorridoColumna++;
+    if(coordenadasX == 9){
+      coordenadasX = 0;
+      coordenadasY ++;
     }else{
-      recorridoRenglon++;
+      coordenadasX ++;
     }
   }
   configuracion.close();
@@ -72,30 +72,30 @@ void Tablero::cargarPartida(){
   configuracion.open("cargarPartida.txt");
 
   string aux;
-  int recorridoRenglon = 0;
-  int recorridoColumna = 0;
+  int coordenadasX = 0;
+  int coordenadasY = 0;
 
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
-      matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
 
       //Se configura la cantidad de avatares de cada tipo en el Box
-      //matrizTablero[recorridoColumna][recorridoRenglon].setTieneEjercito(1, 3, 5);
+      matrizTablero[coordenadasX][coordenadasY].setEjercito(1, 1, 1);
 
       //Guarda las coordenadas de los ejercitos
-      setCoordenadasEjercito(stoi(aux), recorridoColumna, recorridoRenglon);
+      setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
       }else{
-        matrizTablero[recorridoColumna][recorridoRenglon].setID(stoi(aux));
+        matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
         if(stoi(aux) == 9){
-          matrizTablero[recorridoColumna][recorridoRenglon].setTorreta();
+          matrizTablero[coordenadasX][coordenadasY].setTorreta();
         }
     }
     //cout << recorridoRenglon << endl;
-    if(recorridoRenglon == 9){
-      recorridoRenglon = 0;
-      recorridoColumna++;
+    if(coordenadasX == 9){
+      coordenadasX = 0;
+      coordenadasY ++;
     }else{
-      recorridoRenglon++;
+      coordenadasX ++;
     }
   }
   //Se cierra el archivo plano
@@ -104,20 +104,21 @@ void Tablero::cargarPartida(){
 
 //Recorre la matriz del tablero e imprime sus valores, "1" para ejercito 1, "2" para ejercito 2 y "9" para la torreta.
 void Tablero::imprimirTablero(){
-  for(int y = 0; y <= 9; y++){
-    for(int x = 0; x <= 9; x++){
-      cout << matrizTablero[y][x].getID() << "\t";
+  for(int y = 0; y <= 9; y ++){
+    for(int x = 0; x <= 9; x ++){
+      cout << matrizTablero[x][y].getID() << "\t";
     }
     cout << endl << endl;
   }
 }
 
-void Tablero::setCoordenadasEjercito(int _Ejercito, int X, int Y){
+//Guarda las coordenadas del ejercito 
+void Tablero::setCoordenadasEjercito(int _Ejercito, int coordenadasX, int coordenadasY){
   if(_Ejercito == 1){
-    Ejercito1X = X;
-    Ejercito1Y = Y;
+    Ejercito1X = coordenadasX;
+    Ejercito1Y = coordenadasY;
   }else{
-    Ejercito2X = X;
-    Ejercito2Y = Y;
+    Ejercito2X = coordenadasX;
+    Ejercito2Y = coordenadasY;
   }
 }
