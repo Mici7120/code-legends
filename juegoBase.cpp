@@ -25,14 +25,27 @@ void JuegoBase::Main(string configuracionPartida){
     system("clear");
     tableroDeJuego.imprimirTablero();
     cout << "Turno del Jugador " << Turno << endl;
-    if (Turno == 1){
+    
+    if(Turno == 1){
       Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
       Turno = 2;
-    }else{
-      Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
-      Turno = 1;
-    }
-  }while(opcion != 0);
+      }else{
+        Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
+        Turno = 1;
+      }
+  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false || tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false);
+
+  cout << "\nLa partida ha terminado\nGano el ejercito: ";
+  if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false){
+    cout << "1\n";
+  }else{
+    cout << "2\n";
+  }
+
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+
+  cin >> opcion;
   system("clear");
 
 }
@@ -52,6 +65,7 @@ void JuegoBase::sorteoTurno(){
 }
 
 void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
+  tableroDeJuego.matrizTablero[coordeX][coordeY].informacionEjercito();
   cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
 
   int opcionMovimiento;
@@ -62,29 +76,21 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
     switch (opcionMovimiento){
       case 1: //Arriba
       if(coordeX != 0){
-        switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
           case 0:
-          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          coordeX --;
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeY --;
           movimientoCorrecto = true;
-          break;
-
-          case 1:
-          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
-          movimientoCorrecto = true;
-          break;
-
-          case 2:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
-          //movimientoCorrecto = true;
           break;
 
           case 9:
-
           break;
 
           default:
+          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
+          movimientoCorrecto = true;
           break;
         }
       }
@@ -92,29 +98,21 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 2: //Abajo
       if(coordeX != 9){
-        switch(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].getID()){
           case 0:
-          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          coordeX ++;
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeY ++;
           movimientoCorrecto = true;
           break;
 
-          case 1:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
-          case 2:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
           case 9:
-
           break;
 
           default:
+          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
+          movimientoCorrecto = true;
           break;
         }
       }
@@ -122,29 +120,21 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 3: //Derecha
       if(coordeY != 9){
-        switch(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].getID()){
           case 0:
-          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          coordeY ++;
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeX ++;
           movimientoCorrecto = true;
           break;
 
-          case 1:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
-          case 2:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
           case 9:
-
           break;
 
           default:
+          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
+          movimientoCorrecto = true;
           break;
         }
       }
@@ -152,29 +142,21 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
       case 4: //Izquierda
       if(coordeY != 0){
-        switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
+        switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
           case 0:
-          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.getEjercito());
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          coordeY --;
+          coordeX --;
           movimientoCorrecto = true;
           break;
 
-          case 1:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
-          case 2:
-          //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
-          //movimientoCorrecto = true;
-          break;
-
           case 9:
-
           break;
 
           default:
+          tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
+          movimientoCorrecto = true;
           break;
         }
       }
