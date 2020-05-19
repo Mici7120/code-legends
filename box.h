@@ -6,19 +6,18 @@ using namespace std;
 
 class Box{
   public:
-  Box();
-  int ID;
-  void setID(int id);
-  int getID();
+    Box();
+    int ID;
+    void setID(int id);
+    int getID();
 
-  bool Torreta;
-  void setTorreta();
-  
-  Ejercito ejercito;
-  void setTieneEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
-
-  void informacionEjercito();
-
+    bool Torreta;
+    void setTorreta();
+    
+    Ejercito ejercito;
+    void setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
+    bool Derrotado();
+    void informacionEjercito();
 };
 
 #endif
