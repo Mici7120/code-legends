@@ -10,7 +10,7 @@ void JuegoBase::configurarNuevaPartida(){
 
 void JuegoBase::configurarCargarPartida(){
   tableroDeJuego.cargarPartida();
-  Turno = 1;
+  Turno = tableroDeJuego.turnoInicial;
 }
 
 void JuegoBase::Main(string configuracionPartida){
@@ -24,7 +24,11 @@ void JuegoBase::Main(string configuracionPartida){
   do{
     system("clear");
     tableroDeJuego.imprimirTablero();
-    cout << "Turno del Jugador " << Turno << endl;
+    cout << "Vida de la torreta: " << tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta;
+    cout << "\nTurno del Jugador " << Turno << endl;
+
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
     
     if(Turno == 1){
       Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
@@ -33,18 +37,25 @@ void JuegoBase::Main(string configuracionPartida){
         Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
         Turno = 1;
       }
-  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false || tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false);
+  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0);
 
-  cout << "\nLa partida ha terminado\nGano el ejercito: ";
-  if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false){
-    cout << "1\n";
-  }else{
-    cout << "2\n";
-  }
+  system("clear");
+  cout << "La partida ha terminado\n";
+  if(tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0){
+    cout << "Gano el ejercito: ";
+    if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
+      cout << "1\n";
+      }else{
+        cout << "2\n";
+        }
+    }else{
+      cout << "Torreta destruida, gana el ejercito 1\n";
+      }
 
   tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
   tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
 
+  cout << "\n\nVolver al Menu\n";
   cin >> opcion;
   system("clear");
 
@@ -67,7 +78,7 @@ void JuegoBase::sorteoTurno(){
 void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
   vector<float> vidas; //Vector de todas las vidas
   float peorVidaLocal = 0.0; //Se inicializa la peor vida en 0.0
-  tableroDeJuego.matrizTablero[coordeX][coordeY].informacionEjercito();
+
   cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
 
   int opcionMovimiento;
@@ -82,11 +93,11 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       if(coordeX != 0){
         switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
           case 0:
-          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
-          coordeY --;
-          movimientoCorrecto = true;
+            tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
+            tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+            tableroDeJuego.matrizTablero[coordeX][coordeY - 1].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
+            coordeY --;
+            movimientoCorrecto = true;
           break;
 
           //Caso 5 es para el Bonus Vida
@@ -109,14 +120,23 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
             //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
              tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito);
           coordeY --;
           movimientoCorrecto = true;
           break;
 
 
           case 9:
-            break;
+            if(_Ejercito == 1){
+              if(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].Sur){
+                tableroDeJuego.matrizTablero[coordeX][coordeY - 1].daNoTorreta();
+                tableroDeJuego.matrizTablero[coordeX][coordeY - 1].Sur = false;
+                cout << "Ataque a la torreta por el Sur\n";
+                movimientoCorrecto = true;
+              }else{
+                cout << "Ya se ha hecho un ataque por este costado\n";
+                }
+              }
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
@@ -129,12 +149,12 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       case 2: //Abajo
       if(coordeX != 9){
         switch(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].getID()){
-          case 0:
-          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
-          coordeY ++;
-          movimientoCorrecto = true;
+            case 0:
+              tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
+              tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+              tableroDeJuego.matrizTablero[coordeX][coordeY + 1].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
+              coordeY ++;
+              movimientoCorrecto = true;
           break;
 
          //Caso para el Bonus Vida
@@ -153,7 +173,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
           tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito);
           coordeY ++;
           movimientoCorrecto = true;    
             //cout << tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito << endl;
@@ -161,8 +181,18 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
          
             break;
           
-          case 9:
-          break;
+            case 9:
+              if(_Ejercito == 1){
+                if(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].Norte){
+                  tableroDeJuego.matrizTablero[coordeX][coordeY + 1].daNoTorreta();
+                  tableroDeJuego.matrizTablero[coordeX][coordeY + 1].Norte = false;
+                  cout << "Ataque a la torreta por el Norte\n";
+                  movimientoCorrecto = true;
+                }else{
+                  cout << "Ya se ha hecho un ataque por este costado\n";
+                }
+              }
+            break;
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito;
@@ -175,12 +205,12 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       case 3: //Derecha
       if(coordeY != 9){
         switch(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].getID()){
-          case 0:
-          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
-          coordeX ++;
-          movimientoCorrecto = true;
+            case 0:
+              tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
+              tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+              tableroDeJuego.matrizTablero[coordeX + 1][coordeY].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
+              coordeX ++;
+              movimientoCorrecto = true;
           break;
 
       case 5:
@@ -199,13 +229,23 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
   //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
           tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito);
           coordeX ++;
           movimientoCorrecto = true;
             break;
 
-          case 9:
-          break;
+            case 9:
+              if(_Ejercito == 1){
+                if(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].Oeste){
+                  tableroDeJuego.matrizTablero[coordeX + 1][coordeY].daNoTorreta();
+                  tableroDeJuego.matrizTablero[coordeX + 1][coordeY].Oeste = false;
+                  cout << "Ataque a la torreta por el Oeste\n";
+                  movimientoCorrecto = true;
+                }else{
+                  cout << "Ya se ha hecho un ataque por este costado\n";
+                }
+              }
+            break;
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito;
@@ -218,13 +258,13 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       case 4: //Izquierda
       if(coordeY != 0){
         switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
-          case 0:
-          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.getEjercito());
-          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          coordeX --;
-          movimientoCorrecto = true;
-          break;
+            case 0:
+              tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+              tableroDeJuego.matrizTablero[coordeX - 1][coordeY].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
+              tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+              coordeX --;
+              movimientoCorrecto = true;
+            break;
 
       //Caso para el Bonus Vida
       case 5:
@@ -245,7 +285,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
              //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
 
              tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.getEjercito());
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeX --;
           movimientoCorrecto = true;
@@ -253,8 +293,18 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
              break;
 
 
-          case 9:
-          break;
+            case 9:
+              if(_Ejercito == 1){
+                if(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].Este){
+                  tableroDeJuego.matrizTablero[coordeX - 1][coordeY].daNoTorreta();
+                  tableroDeJuego.matrizTablero[coordeX - 1][coordeY].Este = false;
+                  cout << "Ataque a la torreta por el Este\n";
+                  movimientoCorrecto = true;
+                }else{
+                  cout << "Ya se ha hecho un ataque por este costado\n";
+                }
+              }
+            break;
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito;
