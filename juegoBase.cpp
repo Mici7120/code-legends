@@ -65,6 +65,8 @@ void JuegoBase::sorteoTurno(){
 }
 
 void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
+  vector<float> vidas; //Vector de todas las vidas
+  float peorVidaLocal = 0.0; //Se inicializa la peor vida en 0.0
   tableroDeJuego.matrizTablero[coordeX][coordeY].informacionEjercito();
   cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
 
@@ -72,8 +74,10 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
   bool movimientoCorrecto = false;
 
   while(movimientoCorrecto == false){
+    
     cin >> opcionMovimiento;
     switch (opcionMovimiento){
+
       case 1: //Arriba
       if(coordeX != 0){
         switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
@@ -85,8 +89,34 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           movimientoCorrecto = true;
           break;
 
-          case 9:
+          //Caso 5 es para el Bonus Vida
+          //Bonus vida: Se extrajo las vidas del ejercito, y se miro la peor vida y se restaruro a la vida original.
+      case 5:
+            cout << "BONUS VIDA" << endl;
+
+          //Ejemplo de cuando se le quita la vida
+            //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[4]->restarVida(2.9);
+
+            for(int index = 0; index < tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar.size() ; index++){
+              vidas.push_back(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[index]->getVida());
+            }
+            
+            peorVidaLocal =  tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.obtenerPeorVida(vidas);
+
+             tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.restaurarVida(peorVidaLocal);
+             ////////////////////////////////////////////
+
+            //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
+             tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeY --;
+          movimientoCorrecto = true;
           break;
+
+
+          case 9:
+            break;
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
@@ -107,6 +137,30 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           movimientoCorrecto = true;
           break;
 
+         //Caso para el Bonus Vida
+          case 5:
+            cout << "BONUS VIDA" << endl;
+
+            for(int index = 0; index < tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar.size() ; index++){
+              vidas.push_back(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[index]->getVida());
+            }
+            
+            peorVidaLocal =  tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.obtenerPeorVida(vidas);
+
+             tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.restaurarVida(peorVidaLocal);
+
+//////////////////////////////////////////////
+//Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeY ++;
+          movimientoCorrecto = true;    
+            //cout << tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito << endl;
+
+         
+            break;
+          
           case 9:
           break;
 
@@ -129,6 +183,27 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           movimientoCorrecto = true;
           break;
 
+      case 5:
+            cout << "BONUS VIDA" << endl;
+
+            for(int index = 0; index < tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar.size() ; index++){
+              vidas.push_back(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[index]->getVida());
+            }
+            
+            peorVidaLocal =  tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.obtenerPeorVida(vidas);
+
+             tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.restaurarVida(peorVidaLocal);
+
+//////////////////////////////////////////////
+  
+  //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          coordeX ++;
+          movimientoCorrecto = true;
+            break;
+
           case 9:
           break;
 
@@ -150,6 +225,33 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           coordeX --;
           movimientoCorrecto = true;
           break;
+
+      //Caso para el Bonus Vida
+      case 5:
+            cout << "BONUS VIDA" << endl;
+
+            //tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[4]->restarVida(2.9);
+
+            for(int index = 0; index < tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar.size() ; index++){
+              vidas.push_back(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar[index]->getVida());
+            }
+            
+            peorVidaLocal =  tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.obtenerPeorVida(vidas);
+
+             tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.restaurarVida(peorVidaLocal);
+
+             //////////////////////////////
+
+             //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
+
+             tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.getEjercito());
+          tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
+          coordeX --;
+          movimientoCorrecto = true;
+
+             break;
+
 
           case 9:
           break;

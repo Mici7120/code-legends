@@ -103,6 +103,7 @@ float Ejercito::sumaMana(){
   return manaTotal;
   }
 
+
 void Ejercito::restarVida(float vidaPerdida){
   int i = 0;
   bool Ataque = false;
@@ -164,3 +165,72 @@ void Ejercito::movimientoEjercito(vector<Avatar*> ejercitoMovido){
     }
   */
   }
+  /////////////////////////////
+
+
+//Ordenara todas las vidas de menor a mayor y obtendra la peor vida.
+  float Ejercito:: obtenerPeorVida(vector<float> vidas){
+
+  vector<float> ejercitoCopia = vidas; //Ejercito copia, Guarda todas las vidas
+
+//Ordeno de menor a mayor las vidas
+  float temporal = 0;
+  for(int i = 1; i< ejercitoCopia.size(); i++){
+    for(int j = 0; j< ejercitoCopia.size()-1; j++){
+      if(ejercitoCopia[j] > ejercitoCopia[j+1]){
+        temporal = ejercitoCopia[j];
+        ejercitoCopia[j] = ejercitoCopia[j+1];
+        ejercitoCopia[j+1] = temporal;
+      }
+    }
+  }
+  //Retorna la peor vida
+  return ejercitoCopia[0];
+
+} 
+
+//Restaurara la peor vida
+void Ejercito:: restaurarVida(float peorVida){
+
+  
+  cout << "peor vida: " ; //Imprime la peor vida
+  cout << peorVida << endl;
+  
+  //Imprime las vidas iniciales, es decir las afectadas para verlas antes de ser restauradas
+      for(int index = 0; index < ejercitoAvatar.size(); index++){
+          cout<< ejercitoAvatar[index]->getTipo()<< endl;
+          cout<< ejercitoAvatar[index]->getVida()<< endl;
+      }
+
+      //Restaura la vida y luego las imprime otra vez para ver los valores
+      cout << "RESTAURAR VIDA" << endl;
+    for(int index = 0; index < ejercitoAvatar.size(); index++){
+      
+    //Es la comparacion de todas las vidas de cada tipo de avatar, para saber en que momento esta la peor vida.
+
+    if(ejercitoAvatar[index]->getVida() == peorVida){
+      if(ejercitoAvatar[index]->getTipo()=="luchador"){
+        float vidaFaltante = 4-ejercitoAvatar[index]->getVida();
+        ejercitoAvatar[index]->setVida(vidaFaltante+peorVida);
+        break;
+      }
+      //ejercitoAvatar[index], es cada avatar
+      if(ejercitoAvatar[index]->getTipo()=="tirador"){
+        float vidaFaltante =3-ejercitoAvatar[index]->getVida();
+        ejercitoAvatar[index]->setVida(vidaFaltante+peorVida);
+        break;
+      }
+      if(ejercitoAvatar[index]->getTipo()=="mago"){
+        float vidaFaltante = 5-ejercitoAvatar[index]->getVida();
+        ejercitoAvatar[index]->setVida(vidaFaltante+peorVida);
+        break;
+      }
+    }
+  }
+    //Imprime los nuevos valores
+      for(int index = 0; index < ejercitoAvatar.size(); index++){
+          cout<< ejercitoAvatar[index]->getTipo()<< endl;
+          cout<< ejercitoAvatar[index]->getVida()<< endl;
+      }
+
+}
