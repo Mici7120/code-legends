@@ -19,3 +19,11 @@ Tambien se puede ejecutar a traves de [![Run on Repl.it](https://repl.it/badge/g
 Menu del juego
 
 ![Menu](https://github.com/Mici7120/code-legends/blob/Arkhan-Branch-3.0/Img.1.png)
+
+#Notas
+
+Equipo:
+
+Christian Villanueva Paez (Mici7120)
+Johan Stevens Charria (Natchmahr)
+Jeferson Danilo Arevalo (winandtu)
