@@ -25,5 +25,7 @@ Menu del juego
 Equipo:
 
 Christian Villanueva Paez (Mici7120)
+
 Johan Stevens Charria (Natchmahr)
+
 Jeferson Danilo Arevalo (winandtu)
