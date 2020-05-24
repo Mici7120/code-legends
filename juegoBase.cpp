@@ -137,6 +137,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
                 cout << "Ya se ha hecho un ataque por este costado\n";
                 }
               }
+          break;
 
           default:
           tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito / tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito;
