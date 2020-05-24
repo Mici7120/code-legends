@@ -12,17 +12,29 @@ int Box::getID(){
   return ID;
 }
 
+//Configura el box como una torreta, con sus valores iniciales
 void Box::setTorreta(){
   Torreta = true;
+  Norte = true;
+  Sur = true;
+  Este = true;
+  Oeste = true;
+  vidaTorreta = 4;
+  }
+
+//
+void Box::daNoTorreta(){
+  vidaTorreta --;
 }
 
+//Imprime las estadisticas del ejercito
 void Box::informacionEjercito(){
   cout << "\nEstado Ejercito " << getID() << endl;
   cout << "\nTotal Luchadores: " << ejercito.getCantidadLuchadores();
   int contador = 1;
   for(int i = 0; i < ejercito.cantidadEjercito; i++){
     if(ejercito.ejercitoAvatar[i] -> getTipo() == "luchador" && ejercito.ejercitoAvatar[i] -> getVida() > 0){
-      cout << "\n\tVida Luchador " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida() << endl;
+      cout << "\n\tVida Luchador " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida();
       contador ++;
       }
     }
@@ -31,7 +43,7 @@ void Box::informacionEjercito(){
   contador = 1;
   for(int i = 0; i < ejercito.cantidadEjercito; i++){
     if(ejercito.ejercitoAvatar[i] -> getTipo() == "tirador" && ejercito.ejercitoAvatar[i] -> getVida() > 0){
-      cout << "\n\tVida Tirador " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida() << endl;
+      cout << "\n\tVida Tirador " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida();
       contador ++;
       }
     }
@@ -40,7 +52,7 @@ void Box::informacionEjercito(){
   contador = 1;
   for(int i = 0; i < ejercito.cantidadEjercito; i++){
     if(ejercito.ejercitoAvatar[i] -> getTipo() == "mago" && ejercito.ejercitoAvatar[i] -> getVida() > 0){
-      cout << "\n\tVida Mago " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida() << endl;
+      cout << "\n\tVida Mago " << contador << ": " << ejercito.ejercitoAvatar[i] -> getVida();
       contador ++;
       }
     }

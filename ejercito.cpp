@@ -151,14 +151,13 @@ void Ejercito::operator / (Ejercito ejercitoAtacado){
         }
   }
 
-//Mueve los avatares del vector ejercito del Box a otro vector ejercito de otro Box
+//Mueve los avatares del vector de un ejercito a otro
 void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
   ejercitoAvatar.clear();
   setEjercito(ejercitoMovido.getCantidadLuchadores(), ejercitoMovido.getCantidadTiradores(), ejercitoMovido.getCantidadMagos());
   cantidadEjercito = ejercitoMovido.cantidadEjercito;
   for(int i = 0; i < cantidadEjercito; i++){
     ejercitoAvatar[i] -> setVida(ejercitoMovido.ejercitoAvatar[i] -> getVida());
-  }
-
+    }
   ejercitoMovido.ejercitoAvatar.clear();
   }

@@ -1,13 +1,12 @@
 #include "tablero.h"
 
 Tablero::Tablero(){
-
-}
+  }
 
 Tablero::~Tablero(){
+  }
 
-}
-
+//
 void Tablero::setMatrizTablero(){
   //Al puntero le agregamos un array de 10 punteros tipo Box
   matrizTablero = new Box*[10];
@@ -15,13 +14,13 @@ void Tablero::setMatrizTablero(){
   //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
   for(int i = 0; i <= 9 ; i++){
     *(matrizTablero + i) = new Box[10];
+    }
   }
-}
 
+//Se cargara la matriz desde el archivo "nuevaPartida.txt"
 void Tablero::nuevaPartida(){
   setMatrizTablero();
 
-  //Se cargara la matriz desde el archivo "nuevaPartida.txt"
   ifstream configuracion;
   configuracion.open("nuevaPartida.txt");
 
@@ -50,8 +49,11 @@ void Tablero::nuevaPartida(){
       setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
     }else{
       matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
+      //Configura el Box como torreta
       if(stoi(aux) == 9){
         matrizTablero[coordenadasX][coordenadasY].setTorreta();
+        TorretaX = coordenadasX;
+        TorretaY = coordenadasY;
         }
     }
     if(coordenadasX == 9){
@@ -64,16 +66,20 @@ void Tablero::nuevaPartida(){
   configuracion.close();
 }
 
+//Se cargara la matriz desde el archivo "cargarPartida.txt"
 void Tablero::cargarPartida(){
   setMatrizTablero();
 
-  //Se cargara la matriz desde el archivo "cargarPartida.txt"
   ifstream configuracion;
   configuracion.open("cargarPartida.txt");
 
   string aux;
   int coordenadasX = 0;
   int coordenadasY = 0;
+
+  //La primera linea del archivo es el turno ha empezar
+  getline(configuracion, aux, '|');
+  turnoInicial = stoi(aux);
 
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
@@ -86,8 +92,11 @@ void Tablero::cargarPartida(){
       setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
       }else{
         matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
+        //Configura el Box como torreta
         if(stoi(aux) == 9){
           matrizTablero[coordenadasX][coordenadasY].setTorreta();
+          TorretaX = coordenadasX;
+          TorretaY = coordenadasY;
         }
     }
     if(coordenadasX == 9){
