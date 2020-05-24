@@ -18,4 +18,4 @@ Tambien se puede ejecutar a traves de [![Run on Repl.it](https://repl.it/badge/g
 
 Menu del juego 
 
-[![https://i.gyazo.com/5be8139efd1deb739a31452e62fe46a5.png]
+[(https://i.gyazo.com/5be8139efd1deb739a31452e62fe46a5.png)]
