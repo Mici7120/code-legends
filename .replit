@@ -1,2 +1,2 @@
 language = "cpp"
-run = "clang++-7 -pthread -o main main.cpp avatar.cpp box.cpp ejercito.cpp tablero.cpp juegoBase.cpp menu.cpp && ./main"
+run = "g++ -pthread -o main main.cpp avatar.cpp box.cpp ejercito.cpp tablero.cpp juegoBase.cpp menu.cpp && ./main"

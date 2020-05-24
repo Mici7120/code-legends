@@ -23,8 +23,8 @@ void Avatar::setVida(float _Vida){
   Vida = _Vida;
 }
 
-void Avatar::restarVida(float _Daño){
-  Vida -= _Daño;
+void Avatar::restarVida(float _DaNo){
+  Vida -= _DaNo;
 }
 
 //Esta implementacion nos dara el tipo de avatar

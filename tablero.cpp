@@ -10,11 +10,11 @@ Tablero::~Tablero(){
 
 void Tablero::setMatrizTablero(){
   //Al puntero le agregamos un array de 10 punteros tipo Box
-  matrizTablero = new Box*[9];
+  matrizTablero = new Box*[10];
 
   //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
   for(int i = 0; i <= 9 ; i++){
-    *(matrizTablero + i) = new Box[9];
+    *(matrizTablero + i) = new Box[10];
   }
 }
 
@@ -90,7 +90,6 @@ void Tablero::cargarPartida(){
           matrizTablero[coordenadasX][coordenadasY].setTorreta();
         }
     }
-    //cout << recorridoRenglon << endl;
     if(coordenadasX == 9){
       coordenadasX = 0;
       coordenadasY ++;

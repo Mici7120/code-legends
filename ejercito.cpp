@@ -150,17 +150,15 @@ void Ejercito::operator / (Ejercito ejercitoAtacado){
         restarVida(2);
         }
   }
-//Mueve los avatares del vector ejercito a otro vector ejercito
-void Ejercito::movimientoEjercito(vector<Avatar*> ejercitoMovido){
-  vector<Avatar*>::iterator iterator = ejercitoMovido.begin();
-  for(int i = 0; iterator != ejercitoMovido.end(); i++, iterator++){
-    ejercitoAvatar.push_back(new Avatar(ejercitoMovido[i] -> getTipo()));
-    ejercitoAvatar[i] -> setVida(ejercitoMovido[i] -> getVida());
-    }
 
-  /*
-  for(iterator = ejercitoMovido.begin(); iterator != ejercitoMovido.end(); iterator++){
-    ejercitoAvatar.push_back(*iterator);
-    }
-  */
+//Mueve los avatares del vector ejercito del Box a otro vector ejercito de otro Box
+void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
+  ejercitoAvatar.clear();
+  setEjercito(ejercitoMovido.getCantidadLuchadores(), ejercitoMovido.getCantidadTiradores(), ejercitoMovido.getCantidadMagos());
+  cantidadEjercito = ejercitoMovido.cantidadEjercito;
+  for(int i = 0; i < cantidadEjercito; i++){
+    ejercitoAvatar[i] -> setVida(ejercitoMovido.ejercitoAvatar[i] -> getVida());
+  }
+
+  ejercitoMovido.ejercitoAvatar.clear();
   }

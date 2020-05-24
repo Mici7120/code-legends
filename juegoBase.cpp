@@ -26,6 +26,9 @@ void JuegoBase::Main(string configuracionPartida){
     tableroDeJuego.imprimirTablero();
     cout << "Turno del Jugador " << Turno << endl;
     
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+
     if(Turno == 1){
       Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
       Turno = 2;
@@ -33,7 +36,7 @@ void JuegoBase::Main(string configuracionPartida){
         Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
         Turno = 1;
       }
-  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false || tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false);
+  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false);
 
   cout << "\nLa partida ha terminado\nGano el ejercito: ";
   if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false){
@@ -65,7 +68,7 @@ void JuegoBase::sorteoTurno(){
 }
 
 void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
-  tableroDeJuego.matrizTablero[coordeX][coordeY].informacionEjercito();
+  //tableroDeJuego.matrizTablero[coordeX][coordeY].informacionEjercito();
   cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
 
   int opcionMovimiento;
@@ -80,7 +83,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           case 0:
           tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX][coordeY - 1].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
           coordeY --;
           movimientoCorrecto = true;
           break;
@@ -102,7 +105,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           case 0:
           tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX][coordeY + 1].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
           coordeY ++;
           movimientoCorrecto = true;
           break;
@@ -124,7 +127,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           case 0:
           tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
-          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.ejercitoAvatar);
+          tableroDeJuego.matrizTablero[coordeX + 1][coordeY].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
           coordeX ++;
           movimientoCorrecto = true;
           break;
@@ -145,7 +148,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
         switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
           case 0:
           tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
-          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.getEjercito());
+          tableroDeJuego.matrizTablero[coordeX - 1][coordeY].movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY]);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeX --;
           movimientoCorrecto = true;
