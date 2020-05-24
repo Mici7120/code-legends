@@ -24,7 +24,10 @@ class Ejercito{
     vector<Avatar*> getEjercito();// Obtener el ejercito, obitiene el vector de objetos de avatar.
     vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar.
     void movimientoEjercito(vector<Avatar*> ejercitoMovido);
-  
+    ///////////////////////////////
+  // Para obtener peor vida, y restaurar vida
+    float obtenerPeorVida(vector<float> vidas);
+    void restaurarVida(float peorVida);
     int cantidadEjercito;
 };
 
