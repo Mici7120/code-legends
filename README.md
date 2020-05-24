@@ -16,6 +16,6 @@ Tambien se puede ejecutar a traves de [![Run on Repl.it](https://repl.it/badge/g
 
 #Vista Previa
 
-Menu del juego 
+Menu del juego
 
-[https://github.com/Mici7120/code-legends/blob/Arkhan-Branch-3.0/Img.1.png]
+![Menu](https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png)
