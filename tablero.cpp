@@ -1,11 +1,9 @@
 #include "tablero.h"
 
 Tablero::Tablero(){
-
 }
 
 Tablero::~Tablero(){
-
 }
 
 void Tablero::setMatrizTablero(){
@@ -30,9 +28,12 @@ void Tablero::nuevaPartida(){
   int coordenadasY = 0;
   string aux;
 
-  while(getline(configuracion, aux, '|')){
-    matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
-    if(stoi(aux) == 1 || stoi(aux) == 2){
+  //Carga la matriz
+  for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
+    for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
+      getline(configuracion, aux, '|');
+      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
+      if(stoi(aux) == 1 || stoi(aux) == 2){
       //Se ingresan los valores iniciales del ejercito
       int luchadores, tiradores, magos;
       cout << "Configuracion Ejercito " << aux << endl;
@@ -47,31 +48,25 @@ void Tablero::nuevaPartida(){
       //Se configura la cantidad de avatares de cada tipo en el Box
       matrizTablero[coordenadasX][coordenadasY].setEjercitoInicial(luchadores, tiradores, magos);
 
-      //Guarda las coordenadas de los ejercitos
+      //Se configura la cantidad de avatares de cada tipo en el Box
       setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
-    }else if(stoi(aux) == 9){
-      matrizTablero[coordenadasX][coordenadasY].setTorretaInicial();
-      TorretaX = coordenadasX;
-      TorretaY = coordenadasY;
-    }
-    if(coordenadasX == 9){
-      coordenadasX = 0;
-      coordenadasY ++;
-    }else{
-      coordenadasX ++;
+      }else if(stoi(aux) == 9){
+        matrizTablero[coordenadasX][coordenadasY].setTorretaInicial();
+        TorretaX = coordenadasX;
+        TorretaY = coordenadasY;
+      }
     }
   }
   configuracion.close();
 }
 /*!< Carga los valores iniciales para una nueva partida */
 
-
 void Tablero::cargarPartida(){
   setMatrizTablero();
 
   //Se cargara la matriz desde el archivo "cargarPartida.txt"
   ifstream configuracion;
-  configuracion.open("cargarPartida.txt");
+  configuracion.open("partidaGuardada.txt");
 
   string aux;
   int coordenadasX = 0;
@@ -81,6 +76,7 @@ void Tablero::cargarPartida(){
   getline(configuracion, aux, '|');
   turnoInicial = stoi(aux);
 
+  //Carga la matriz
   for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
     for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
       getline(configuracion, aux, '|');
@@ -94,8 +90,9 @@ void Tablero::cargarPartida(){
     }
   }
 
+  //Carga las estadisticas de los ejercitos
   vector<float> vector;
-  //ejercito1
+  //Ejercito1
   getline(configuracion, aux, '|');
   int cantidadLuchadores1 = stoi(aux);
   for(int i = 0; i < cantidadLuchadores1; i++){
@@ -119,7 +116,7 @@ void Tablero::cargarPartida(){
   matrizTablero[Ejercito1X][Ejercito1Y].ejercito.setEjercito(cantidadLuchadores1, cantidadTiradores1, cantidadMagos1, vector);
 
   vector.clear();
-  //ejercito2
+  //Ejercito2
   getline(configuracion, aux, '|');
   int cantidadLuchadores2 = stoi(aux);
   for(int i = 0; i < cantidadLuchadores2; i++){
@@ -157,7 +154,7 @@ void Tablero::cargarPartida(){
 
 void Tablero::guardarPartida(int _Turno){
   ofstream guardarPartida;
-  guardarPartida.open("cargarPartida.txt");
+  guardarPartida.open("partidaGuardada.txt");
 
   //Guarda el turno en la primera linea del archivo
   guardarPartida << _Turno << " |\n";
@@ -171,7 +168,7 @@ void Tablero::guardarPartida(int _Turno){
   }
   guardarPartida << endl << endl;
 
-  //Guarda la informacion de los vectores
+  //Guarda la informacion de los ejercitos y sus vidas en un vector
   int vectorEjercito1 = 0;
   int vectorEjercito2 = 0;
   guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadLuchadores() << " |\n";
@@ -216,7 +213,7 @@ void Tablero::guardarPartida(int _Turno){
   }
 
   //Guarda la informacion de la torreta
-  guardarPartida << endl << endl << matrizTablero[TorretaX][TorretaY].vidaTorreta << " |\n";
+  guardarPartida << endl << endl << matrizTablero[TorretaX][TorretaY].getVidaTorreta() << " |\n";
   if(matrizTablero[TorretaX][TorretaY].Norte){
     guardarPartida << "1 |\n";
   }else{
@@ -243,6 +240,7 @@ void Tablero::guardarPartida(int _Turno){
 
   guardarPartida.close();
 }
+/*!< Guarda el estado de la partida actual en el archivo "partidaGuardada" */
 
 void Tablero::imprimirTablero(){
   for(int y = 0; y <= 9; y ++){
