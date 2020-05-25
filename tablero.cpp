@@ -173,43 +173,43 @@ void Tablero::guardarPartida(int _Turno){
   //Guarda la informacion de los ejercitos y sus vidas en un vector
   int vectorEjercito1 = 0;
   int vectorEjercito2 = 0;
-  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadLuchadores() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadLuchadores(); i++){
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Luchadores << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Luchadores; i++){
     guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
     vectorEjercito1 ++;
   }
   guardarPartida << endl;
 
-  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadTiradores() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadTiradores(); i++){
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Tiradores << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Tiradores; i++){
     guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
     vectorEjercito1 ++;
   }
   guardarPartida << endl;
 
-  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadMagos() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadMagos(); i++){
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Magos << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Magos; i++){
     guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
     vectorEjercito1 ++;
   }
   guardarPartida << endl << endl;
 
-  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadLuchadores() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadLuchadores(); i++){
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Luchadores << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Luchadores; i++){
     guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
     vectorEjercito2 ++;
   }
   guardarPartida << endl;
 
-  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadTiradores() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadTiradores(); i++){
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Tiradores << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Tiradores; i++){
     guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
     vectorEjercito2 ++;
   }
   guardarPartida << endl;
 
-  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadMagos() << " |\n";
-  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadMagos(); i++){
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Magos << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Magos; i++){
     guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
     vectorEjercito2 ++;
   }

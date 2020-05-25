@@ -41,15 +41,18 @@ void Ejercito::setEjercitoInicial(int luchadores, int tiradores, int magos){
   //Añado al vector la cantidad de luchadores que el usuario tiene. 
   for(int i = 0; i < luchadores; i ++){
     ejercitoAvatar.push_back(new Avatar("luchador"));
-    }
+  }
   //Añado al vector la cantidad de tiradores que el usuario tiene.
   for(int i = 0; i < tiradores; i ++){
     ejercitoAvatar.push_back(new Avatar("tirador"));
-    }
+  }
   //Añado al vector la cantidad de magos que el usuario tiene.
   for(int i = 0; i < magos; i ++){
     ejercitoAvatar.push_back(new Avatar("mago"));
-    }
+  }
+  Luchadores = luchadores;
+  Tiradores = tiradores;
+  Magos = magos;
   cantidadEjercito = luchadores + tiradores + magos;
 }
 /*!< Inicializa el ejercito con la cantidad correspondiente de avatares */
@@ -62,19 +65,22 @@ void Ejercito::setEjercito(int luchadores, int tiradores, int magos, vector<floa
     ejercitoAvatar.push_back(new Avatar("luchador"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
   //Añado al vector la cantidad de tiradores que el usuario tiene.
   for(int i = 0; i < tiradores; i ++){
     ejercitoAvatar.push_back(new Avatar("tirador"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
   //Añado al vector la cantidad de magos que el usuario tiene.
   for(int i = 0; i < magos; i ++){
     ejercitoAvatar.push_back(new Avatar("mago"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
+  Luchadores = luchadores;
+  Tiradores = tiradores;
+  Magos = magos;
   cantidadEjercito = luchadores + tiradores + magos;
 }
 /*!< Inicializa el ejercito con la cantidad correspondiente de avatares y su respectiva vida */
@@ -172,7 +178,7 @@ void Ejercito::operator / (Ejercito ejercitoAtacado){
 
 void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
   ejercitoAvatar.clear();
-  setEjercitoInicial(ejercitoMovido.getCantidadLuchadores(), ejercitoMovido.getCantidadTiradores(), ejercitoMovido.getCantidadMagos());
+  setEjercitoInicial(ejercitoMovido.Luchadores, ejercitoMovido.Tiradores, ejercitoMovido.Magos);
   cantidadEjercito = ejercitoMovido.cantidadEjercito;
   for(int i = 0; i < cantidadEjercito; i++){
     ejercitoAvatar[i] -> setVida(ejercitoMovido.ejercitoAvatar[i] -> getVida());

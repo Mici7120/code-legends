@@ -25,6 +25,7 @@ class Ejercito{
     void setEjercito(int luchadores, int tiradores, int magos, vector<float> vidas);
     void movimientoEjercito(Ejercito ejercitoMovido);
 
+    int Luchadores, Tiradores, Magos;
     float obtenerPeorVida(vector<float> vidas);
     void restaurarVida(float peorVida);
     int cantidadEjercito;
