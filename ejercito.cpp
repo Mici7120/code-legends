@@ -56,11 +56,6 @@ void Ejercito::setEjercito(int luchadores, int tiradores, int magos){
   cantidadEjercito = luchadores + tiradores + magos;
 } 
 
-//Esta implementacion obtendra los valores modificados o los valores que se actualizaran para dar el ejercito.
-vector<Avatar*> Ejercito::getEjercito(){ //cree un nuevo tipo el cual es: vector<*avatar>
-  return ejercitoAvatar;
-  }
-
 //Cuenta el numero de soldados vivos.
 int Ejercito::soldadosVivos(){
   int numeroDeSoldados = 0;
@@ -151,22 +146,18 @@ void Ejercito::operator / (Ejercito ejercitoAtacado){
         restarVida(2);
         }
   }
-//Mueve los avatares del vector ejercito a otro vector ejercito
-void Ejercito::movimientoEjercito(vector<Avatar*> ejercitoMovido){
-  vector<Avatar*>::iterator iterator = ejercitoMovido.begin();
-  for(int i = 0; iterator != ejercitoMovido.end(); i++, iterator++){
-    ejercitoAvatar.push_back(new Avatar(ejercitoMovido[i] -> getTipo()));
-    ejercitoAvatar[i] -> setVida(ejercitoMovido[i] -> getVida());
-    }
 
-  /*
-  for(iterator = ejercitoMovido.begin(); iterator != ejercitoMovido.end(); iterator++){
-    ejercitoAvatar.push_back(*iterator);
+//Mueve los avatares del vector de un ejercito a otro
+void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
+  ejercitoAvatar.clear();
+  setEjercito(ejercitoMovido.getCantidadLuchadores(), ejercitoMovido.getCantidadTiradores(), ejercitoMovido.getCantidadMagos());
+  cantidadEjercito = ejercitoMovido.cantidadEjercito;
+  for(int i = 0; i < cantidadEjercito; i++){
+    ejercitoAvatar[i] -> setVida(ejercitoMovido.ejercitoAvatar[i] -> getVida());
     }
-  */
+  ejercitoMovido.ejercitoAvatar.clear();
   }
   /////////////////////////////
-
 
 //Ordenara todas las vidas de menor a mayor y obtendra la peor vida.
   float Ejercito:: obtenerPeorVida(vector<float> vidas){
