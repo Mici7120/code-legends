@@ -14,7 +14,7 @@ class JuegoBase{
   void configurarNuevaPartida();
   void configurarCargarPartida();
   void sorteoTurno();
-  void Movimiento(int _Ejercito, int &coordeX, int &coordeY, int opcion);
+  void Movimiento(int _Ejercito, int &coordeX, int &coordeY, int &opcion);
 
   int Turno;
   Tablero tableroDeJuego;
