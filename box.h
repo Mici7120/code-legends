@@ -8,15 +8,16 @@ class Box{
   public:
     Box();
     int ID;
+    /*!< Identificacion de la casilla que indica si es ejercito (1 o 2) o torreta (9) */
     void setID(int id);
     int getID();
 
     bool Torreta;
     /*!< Posición de la torreta */
-    int vidaTorreta;
-    /*!< Puntos de gole de la torreta (vida) */
     bool Norte, Sur, Este, Oeste;
     /*!< Posición de los escudos de la torreta */
+    int getVidaTorreta();
+    void setVidaTorreta(int _vidaTorreta);
     void setTorreta(int _valoresTorreta[5]);
     void setTorretaInicial();
     void daNoTorreta();
@@ -27,6 +28,10 @@ class Box{
     void movimientoEjercito(Box boxMovido);
     bool Derrotado();
     void informacionEjercito();
+
+    protected:
+    int vidaTorreta;
+    /*!< Puntos de golpe de la torreta (vida) */
 };
 
 #endif

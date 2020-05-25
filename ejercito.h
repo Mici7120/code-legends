@@ -5,11 +5,9 @@
 #include <vector>
 using namespace std;
 
-//Se creo la clase ejercito la cual tendra atributos protegidos, los cuales nos serviran para guardar los valores que se introduzcan en el constructor, de igual forma el constructor tendra tres parametros que seran los grupos de cada tipo de avatares.
 class Ejercito{
   public: 
     Ejercito();
-    //Seran los metodos que nos servira para dar la cantidad total de cada tipo de avatar y de igual forma nos dara la suma total de cada ejercito de avatares.
     int getCantidadLuchadores();
     int getCantidadTiradores();
     int getCantidadMagos();
@@ -22,12 +20,12 @@ class Ejercito{
     float sumaMana();
 
     vector<Avatar*> ejercitoAvatar;
-    /*!<avatar* es un vector de punteros a la clase avatar */
+    /*!< Es un vector de punteros de clase Avatar */
     void setEjercitoInicial(int luchadores, int tiradores, int magos);
     void setEjercito(int luchadores, int tiradores, int magos, vector<float> vidas);
     void movimientoEjercito(Ejercito ejercitoMovido);
 
-  //Para obtener peor vida, y restaurar vida
+    int Luchadores, Tiradores, Magos;
     float obtenerPeorVida(vector<float> vidas);
     void restaurarVida(float peorVida);
     int cantidadEjercito;

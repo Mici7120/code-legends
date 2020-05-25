@@ -33,7 +33,6 @@ void Menu::MenuPrincipal(){
      case 2:
      system("clear");
      Partida.Main("cargarPartida");
-     //delete Partida;
      break;
 
     //imprima las instrucciones
@@ -49,8 +48,6 @@ void Menu::MenuPrincipal(){
   while(opcion != 4);
 }
 /*!< Ejecuta una serie de metodos dependiendo de la opción que se elija */
-
-
 
 void Menu::Instrucciones(){
   string imprimirInstrucciones;
@@ -68,4 +65,4 @@ void Menu::Instrucciones(){
   }
   system("clear");
 }
-/*!< Carga las instrucciones del archivo "Instrucciones.txt" */
+/*!< Carga las instrucciones del juego del archivo "Instrucciones.txt" */

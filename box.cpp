@@ -12,14 +12,25 @@ int Box::getID(){
   return ID;
 }
 
+int Box::getVidaTorreta(){
+  return vidaTorreta;
+}
+/*!< Retorna la vida actual de la torreta */
+
+void Box::setVidaTorreta(int _vidaTorreta){
+  vidaTorreta = _vidaTorreta;
+}
+/*!< Modifica la vida de la torreta */
+
 void Box::setTorretaInicial(){
   Torreta = true;
   Norte = true;
   Sur = true;
   Este = true;
   Oeste = true;
-  vidaTorreta = 4;
+  setVidaTorreta(4);
 }
+/*!< Inicializa los valores predetermindados a la torreta */
 
 void Box::setTorreta(int _valoresTorreta[5]){
   Torreta = true;
@@ -35,7 +46,6 @@ void Box::daNoTorreta(){
   vidaTorreta --;
 }
 /*!< Daño a la torreta */
-
 
 void Box::informacionEjercito(){
   cout << "\nEstado Ejercito " << getID() << endl;
@@ -77,6 +87,7 @@ void Box::setEjercitoInicial(int numeroLuchadores, int numeroTiradores, int nume
 void Box::setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago, vector<float> vidas){
   ejercito.setEjercito(numeroLuchadores, numeroTiradores, numeroMago, vidas);
 }
+/*!< Crea el ejercito con los respectivos valores de vida de cada avatar */
 
 void Box::movimientoEjercito(Box boxMovido){
   ejercito.movimientoEjercito(boxMovido.ejercito);
@@ -86,4 +97,4 @@ void Box::movimientoEjercito(Box boxMovido){
 bool Box::Derrotado(){
   return ejercito.derrotado();
 }
-/*!< Especifica si ha sido derrotado */
+/*!< Especifica si el ejercito ha sido derrotado */

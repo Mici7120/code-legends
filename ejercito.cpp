@@ -1,8 +1,6 @@
 #include "ejercito.h"
 
-//Aqui cada cantidad de cada tipo de avatares(cantidadLuchadores,cantidadTiradores, cantidadMagos) guardara los valores que se introduciran en el ejercito ejemplo: 15 luchadores, 12 tiradores, 10 magos.
 Ejercito::Ejercito(){
-
 } 
 
 int Ejercito::getCantidadLuchadores(){
@@ -14,7 +12,7 @@ int Ejercito::getCantidadLuchadores(){
   }
   return Luchadores;
 }
-/*!< Esta implementacion nos dara la cantidad total de los luchadores */
+/*!< Esta implementacion nos dara la cantidad total de luchadores vivos */
 
 int Ejercito::getCantidadTiradores(){
   int Tiradores = 0;
@@ -25,7 +23,7 @@ int Ejercito::getCantidadTiradores(){
   }
   return Tiradores;
 }
-/*!< Esta implementacion nos dara la cantidad total de los tiradores */
+/*!< Esta implementacion nos dara la cantidad total de tiradores vivos */
 
 int Ejercito::getCantidadMagos(){
   int Magos = 0;
@@ -36,25 +34,28 @@ int Ejercito::getCantidadMagos(){
   }
   return Magos;
 }
-/*!< Esta implementacion nos dara la cantidad total de los magos */
+/*!< Esta implementacion nos dara la cantidad total de magos vivos */
 
 void Ejercito::setEjercitoInicial(int luchadores, int tiradores, int magos){
   ejercitoAvatar.clear();
   //Añado al vector la cantidad de luchadores que el usuario tiene. 
   for(int i = 0; i < luchadores; i ++){
     ejercitoAvatar.push_back(new Avatar("luchador"));
-    }
+  }
   //Añado al vector la cantidad de tiradores que el usuario tiene.
   for(int i = 0; i < tiradores; i ++){
     ejercitoAvatar.push_back(new Avatar("tirador"));
-    }
+  }
   //Añado al vector la cantidad de magos que el usuario tiene.
   for(int i = 0; i < magos; i ++){
     ejercitoAvatar.push_back(new Avatar("mago"));
-    }
+  }
+  Luchadores = luchadores;
+  Tiradores = tiradores;
+  Magos = magos;
   cantidadEjercito = luchadores + tiradores + magos;
 }
-/*!< Setea el ejercito con el fin de modificar sus valores */
+/*!< Inicializa el ejercito con la cantidad correspondiente de avatares */
 
 void Ejercito::setEjercito(int luchadores, int tiradores, int magos, vector<float> vidas){
   ejercitoAvatar.clear();
@@ -64,33 +65,37 @@ void Ejercito::setEjercito(int luchadores, int tiradores, int magos, vector<floa
     ejercitoAvatar.push_back(new Avatar("luchador"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
   //Añado al vector la cantidad de tiradores que el usuario tiene.
   for(int i = 0; i < tiradores; i ++){
     ejercitoAvatar.push_back(new Avatar("tirador"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
   //Añado al vector la cantidad de magos que el usuario tiene.
   for(int i = 0; i < magos; i ++){
     ejercitoAvatar.push_back(new Avatar("mago"));
     ejercitoAvatar[vector] -> setVida(vidas[vector]);
     vector ++;
-    }
+  }
+  Luchadores = luchadores;
+  Tiradores = tiradores;
+  Magos = magos;
   cantidadEjercito = luchadores + tiradores + magos;
 }
+/*!< Inicializa el ejercito con la cantidad correspondiente de avatares y su respectiva vida */
 
 int Ejercito::soldadosVivos(){
   int numeroDeSoldados = 0;
   for(int i = 0; i < cantidadEjercito; i++){
     if(ejercitoAvatar[i] -> getVida() > 0){
       numeroDeSoldados ++;
-      }
     }
-  return numeroDeSoldados;
   }
+  return numeroDeSoldados;
+}
+/*!< Indica el numero de soldados vivos*/
 
-//Indica si el ejercito ha sido destruido.
 bool Ejercito::derrotado(){
     if(soldadosVivos() <= 0){
       return true;
@@ -98,8 +103,8 @@ bool Ejercito::derrotado(){
         return false;
       }
   }
+/*!< Indica si el ejercito ha sido destruido */
 
-//Suma los puntos de poder del ejercito.
 float Ejercito::sumaPoder(){
   int poderTotal = 0;
   for(int i = 0; i < cantidadEjercito; i++){
@@ -109,18 +114,18 @@ float Ejercito::sumaPoder(){
     }
   return poderTotal;
   }
+/*!< Suma los puntos de poder del ejercito */
 
-//Suma los puntos de mana del ejercito.
 float Ejercito::sumaMana(){
   int manaTotal = 0;
   for(int i = 0; i < cantidadEjercito; i++){
     if(ejercitoAvatar[i] -> getVida() > 0){
-      manaTotal += ejercitoAvatar[i] -> getMana();
-      }
+    manaTotal += ejercitoAvatar[i] -> getMana();
     }
-  return manaTotal;
   }
-
+  return manaTotal;
+}
+/*!< Suma los puntos de mana del ejercito */
 
 void Ejercito::restarVida(float vidaPerdida){
   int i = 0;
@@ -130,63 +135,62 @@ void Ejercito::restarVida(float vidaPerdida){
     if(ejercitoAvatar[i] -> getTipo() == "mago" && ejercitoAvatar[i] -> getVida() > 0){
       ejercitoAvatar[i] -> restarVida(vidaPerdida);
       Ataque = true;
-      }else{
-        i++;
-      }
+    }else{
+      i++;
     }
+  }
   if(Ataque == false){
     i = 0;
     while(i < cantidadEjercito && Ataque == false){
       if(ejercitoAvatar[i] -> getTipo() == "luchador" && ejercitoAvatar[i] -> getVida() > 0){
         ejercitoAvatar[i] -> restarVida(vidaPerdida);
         Ataque = true;
-        }else{
-          i++;
-          }
+      }else{
+        i++;
       }
     }
+  }
   if(Ataque == false){
     i = 0;
     while(i < cantidadEjercito && Ataque == false){
       if(ejercitoAvatar[i] -> getTipo() == "tirador" && ejercitoAvatar[i] -> getVida() > 0){
         ejercitoAvatar[i] -> restarVida(vidaPerdida);
         Ataque = true;
-        }else{
-          i++;
-          }
+      }else{
+        i++;
       }
     }
   }
+}
+/*!< Resta vida al avatar de menor poder */
 
-//Recibe al otro Ejercito y hace el combate
 void Ejercito::operator / (Ejercito ejercitoAtacado){
   if(sumaPoder() > ejercitoAtacado.sumaMana()){
-    ejercitoAtacado.restarVida(2);
-    }else if(sumaPoder() < ejercitoAtacado.sumaMana()){
-      restarVida(2);
-      }else{
-        ejercitoAtacado.restarVida(2);
-        restarVida(2);
-        }
+    ejercitoAtacado.restarVida(.5);
+  }else if(sumaPoder() < ejercitoAtacado.sumaMana()){
+    restarVida(.5);
+  }else{
+    ejercitoAtacado.restarVida(.2);
+    restarVida(.2);
   }
+}
+/*!< Recibe como parametro al otro ejercito y hace el combate */
 
-//Mueve los avatares del vector de un ejercito a otro
 void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
   ejercitoAvatar.clear();
-  setEjercitoInicial(ejercitoMovido.getCantidadLuchadores(), ejercitoMovido.getCantidadTiradores(), ejercitoMovido.getCantidadMagos());
+  setEjercitoInicial(ejercitoMovido.Luchadores, ejercitoMovido.Tiradores, ejercitoMovido.Magos);
   cantidadEjercito = ejercitoMovido.cantidadEjercito;
   for(int i = 0; i < cantidadEjercito; i++){
     ejercitoAvatar[i] -> setVida(ejercitoMovido.ejercitoAvatar[i] -> getVida());
-    }
-  ejercitoMovido.ejercitoAvatar.clear();
   }
+  ejercitoMovido.ejercitoAvatar.clear();
+}
+/*!< Mueve los avatares del vector de un ejercito a otro */
 
-//Ordenara todas las vidas de menor a mayor y obtendra la peor vida.
-  float Ejercito:: obtenerPeorVida(vector<float> vidas){
-
+float Ejercito:: obtenerPeorVida(vector<float> vidas){
   vector<float> ejercitoCopia = vidas; //Ejercito copia, Guarda todas las vidas
 
-//Ordeno de menor a mayor las vidas
+  //Ordeno de menor a mayor las vidas
   float temporal = 0;
   for(int i = 1; i< ejercitoCopia.size(); i++){
     for(int j = 0; j< ejercitoCopia.size()-1; j++){
@@ -199,24 +203,21 @@ void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
   }
   //Retorna la peor vida
   return ejercitoCopia[0];
-
 }
-/*!< Cuenta el numero de soldados vivos */
+/*!< Ordenara todas las vidas de menor a mayor y obtendra la peor vida */
 
 void Ejercito:: restaurarVida(float peorVida){
-
-  
   cout << "peor vida: " ; //Imprime la peor vida
   cout << peorVida << endl;
   
   //Imprime las vidas iniciales, es decir las afectadas para verlas antes de ser restauradas
-      for(int index = 0; index < ejercitoAvatar.size(); index++){
-          cout<< ejercitoAvatar[index]->getTipo()<< endl;
-          cout<< ejercitoAvatar[index]->getVida()<< endl;
-      }
+    for(int index = 0; index < ejercitoAvatar.size(); index++){
+      cout<< ejercitoAvatar[index]->getTipo()<< endl;
+      cout<< ejercitoAvatar[index]->getVida()<< endl;
+    }
 
-      //Restaura la vida y luego las imprime otra vez para ver los valores
-      cout << "RESTAURAR VIDA" << endl;
+    //Restaura la vida y luego las imprime otra vez para ver los valores
+    cout << "RESTAURAR VIDA" << endl;
     for(int index = 0; index < ejercitoAvatar.size(); index++){
       
     //Es la comparacion de todas las vidas de cada tipo de avatar, para saber en que momento esta la peor vida.
@@ -240,11 +241,10 @@ void Ejercito:: restaurarVida(float peorVida){
       }
     }
   }
-    //Imprime los nuevos valores
-      for(int index = 0; index < ejercitoAvatar.size(); index++){
-          cout<< ejercitoAvatar[index]->getTipo()<< endl;
-          cout<< ejercitoAvatar[index]->getVida()<< endl;
-      }
-
+  //Imprime los nuevos valores
+  for(int index = 0; index < ejercitoAvatar.size(); index++){
+    cout<< ejercitoAvatar[index]->getTipo()<< endl;
+    cout<< ejercitoAvatar[index]->getVida()<< endl;
+  }
 }
 /*!< Restaura al avatar con la vida  más baja */
