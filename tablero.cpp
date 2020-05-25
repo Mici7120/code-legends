@@ -10,11 +10,11 @@ Tablero::~Tablero(){
 
 void Tablero::setMatrizTablero(){
   //Al puntero le agregamos un array de 10 punteros tipo Box
-  matrizTablero = new Box*[9];
+  matrizTablero = new Box*[10];
 
   //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
   for(int i = 0; i <= 9 ; i++){
-    *(matrizTablero + i) = new Box[9];
+    *(matrizTablero + i) = new Box[10];
   }
 }
 
@@ -52,6 +52,8 @@ void Tablero::nuevaPartida(){
       matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
       if(stoi(aux) == 9){
         matrizTablero[coordenadasX][coordenadasY].setTorreta();
+        TorretaX = coordenadasX;
+        TorretaY = coordenadasY;
         }
     }
     if(coordenadasX == 9){
@@ -75,6 +77,10 @@ void Tablero::cargarPartida(){
   int coordenadasX = 0;
   int coordenadasY = 0;
 
+  //La primera linea del archivo es el turno ha empezar
+  getline(configuracion, aux, '|');
+  turnoInicial = stoi(aux);
+
   while(getline(configuracion, aux, '|')){
     if(stoi(aux) == 1 || stoi(aux) == 2){
       matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
@@ -88,6 +94,8 @@ void Tablero::cargarPartida(){
         matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
         if(stoi(aux) == 9){
           matrizTablero[coordenadasX][coordenadasY].setTorreta();
+          TorretaX = coordenadasX;
+          TorretaY = coordenadasY;
         }
     }
     //cout << recorridoRenglon << endl;

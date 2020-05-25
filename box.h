@@ -12,10 +12,14 @@ class Box{
     int getID();
 
     bool Torreta;
+    int vidaTorreta;
+    bool Norte, Sur, Este, Oeste;
     void setTorreta();
+    void daNoTorreta();
     
     Ejercito ejercito;
     void setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
+    void movimientoEjercito(Box boxMovido);
     bool Derrotado();
     void informacionEjercito();
 };
