@@ -157,7 +157,6 @@ void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
     }
   ejercitoMovido.ejercitoAvatar.clear();
   }
-  /////////////////////////////
 
 //Ordenara todas las vidas de menor a mayor y obtendra la peor vida.
   float Ejercito:: obtenerPeorVida(vector<float> vidas){
