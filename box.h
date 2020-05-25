@@ -12,13 +12,18 @@ class Box{
     int getID();
 
     bool Torreta;
+    /*!< Posición de la torreta */
     int vidaTorreta;
+    /*!< Puntos de gole de la torreta (vida) */
     bool Norte, Sur, Este, Oeste;
-    void setTorreta();
+    /*!< Posición de los escudos de la torreta */
+    void setTorreta(int _valoresTorreta[5]);
+    void setTorretaInicial();
     void daNoTorreta();
     
     Ejercito ejercito;
-    void setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago);
+    void setEjercitoInicial(int numeroLuchadores, int numeroTiradores, int numeroMago);
+    void setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago, vector<float> vidas);
     void movimientoEjercito(Box boxMovido);
     bool Derrotado();
     void informacionEjercito();

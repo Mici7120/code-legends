@@ -10,23 +10,24 @@
 using namespace std;
 
 class Avatar{
-
-//Atributos principales de los avatares
   public:
     Avatar(string _tipoAvatar);
-
-    void setVida(float _Vida); //Para modificar la vida
-    void restarVida(float _Daño);
-    string getTipo(); //Clasificara el tipo de avatar para ingresar a la caracteristica del poder
-    float getPoder(); //Metodo que nos servira para dar el poder
-    float getVida(); //Metodo que nos servira para dar la vida
-    float getMana(); //Metodo que nos servira para dar el mana
+    void setVida(float _Vida);
+    void restarVida(float _DaNo);
+    string getTipo();
+    float getPoder();
+    float getVida();
+    float getMana();
 
   protected:
     string tipoAvatar;
+    /*!< Tipo de Avatar (luchador, tirador o mago) */
     float Poder;
+    /*!< Poder del Avatar (Ataque) */
     float Mana;
-    float Vida; 
+    /*!< Mana del Avatar (Defensa) */
+    float Vida;
+    /*!< Vida */
 };
 
 #endif

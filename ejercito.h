@@ -20,14 +20,18 @@ class Ejercito{
     void restarVida(float vidaPerdida);
     float sumaPoder();
     float sumaMana();
-    void setEjercito(int luchadores, int tiradores, int magos);
-    vector<Avatar*> ejercitoAvatar; //avatar* es un vector de punteros a la clase avatar.
+
+    vector<Avatar*> ejercitoAvatar;
+    /*!<avatar* es un vector de punteros a la clase avatar */
+    void setEjercitoInicial(int luchadores, int tiradores, int magos);
+    void setEjercito(int luchadores, int tiradores, int magos, vector<float> vidas);
     void movimientoEjercito(Ejercito ejercitoMovido);
-    ///////////////////////////////
-  // Para obtener peor vida, y restaurar vida
+
+  //Para obtener peor vida, y restaurar vida
     float obtenerPeorVida(vector<float> vidas);
     void restaurarVida(float peorVida);
     int cantidadEjercito;
+    /*!< Numero de unidades dentro del ejercito */
 };
 
 #endif

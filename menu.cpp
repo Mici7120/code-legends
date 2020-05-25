@@ -48,9 +48,10 @@ void Menu::MenuPrincipal(){
   }
   while(opcion != 4);
 }
+/*!< Ejecuta una serie de metodos dependiendo de la opción que se elija */
 
 
-//Carga las instrucciones del archivo "Instrucciones.txt"
+
 void Menu::Instrucciones(){
   string imprimirInstrucciones;
   ifstream archivoInstrucciones;
@@ -67,3 +68,4 @@ void Menu::Instrucciones(){
   }
   system("clear");
 }
+/*!< Carga las instrucciones del archivo "Instrucciones.txt" */
