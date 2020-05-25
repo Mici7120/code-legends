@@ -49,10 +49,10 @@ void JuegoBase::Main(string configuracionPartida){
       cout << "Gano el ejercito: ";
       if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
         cout << "1\n";
-        }else{
-          cout << "2\n";
-          }
       }else{
+        cout << "2\n";
+      }
+    }else{
         cout << "Torreta destruida, gana el ejercito 1\n";
         }
 

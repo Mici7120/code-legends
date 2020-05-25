@@ -48,7 +48,7 @@ void Tablero::nuevaPartida(){
       //Se configura la cantidad de avatares de cada tipo en el Box
       matrizTablero[coordenadasX][coordenadasY].setEjercitoInicial(luchadores, tiradores, magos);
 
-      //Se configura la cantidad de avatares de cada tipo en el Box
+      //Se guarda las coordenadas del ejercito
       setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
       }else if(stoi(aux) == 9){
         matrizTablero[coordenadasX][coordenadasY].setTorretaInicial();
@@ -80,6 +80,8 @@ void Tablero::cargarPartida(){
   for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
     for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
       getline(configuracion, aux, '|');
+
+      //Se guarda las coordenadas del ejercito
       matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
       if(stoi(aux) == 1 || stoi(aux) == 2){
         setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
