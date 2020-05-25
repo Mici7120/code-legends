@@ -39,8 +39,8 @@ void Box::setTorreta(int _valoresTorreta[5]){
   Sur = _valoresTorreta[2];
   Este = _valoresTorreta[3];
   Oeste = _valoresTorreta[4];
-  }
-/*!< Configura el box como una torreta, con sus valores iniciales */
+}
+/*!< Configura el box como una torreta, con los valores cargados */
 
 void Box::daNoTorreta(){
   vidaTorreta --;

@@ -10,7 +10,7 @@ void Tablero::setMatrizTablero(){
   //Al puntero le agregamos un array de 10 punteros tipo Box
   matrizTablero = new Box*[10];
 
-  //A cada uno de los punteros del array, agregamos un array de 9 objetos Box, para completar la matriz
+  //A cada uno de los punteros del array, agregamos un array de 10 objetos Box, para completar la matriz
   for(int i = 0; i <= 9 ; i++){
     *(matrizTablero + i) = new Box[10];
   }
@@ -171,6 +171,7 @@ void Tablero::guardarPartida(int _Turno){
   guardarPartida << endl << endl;
 
   //Guarda la informacion de los ejercitos y sus vidas en un vector
+  //Ejercito 1
   int vectorEjercito1 = 0;
   int vectorEjercito2 = 0;
   guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.Luchadores << " |\n";
@@ -194,6 +195,7 @@ void Tablero::guardarPartida(int _Turno){
   }
   guardarPartida << endl << endl;
 
+  //Ejercito 2
   guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Luchadores << " |\n";
   for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.Luchadores; i++){
     guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
