@@ -11,6 +11,7 @@ class Tablero{
   void setMatrizTablero();
   void nuevaPartida();
   void cargarPartida();
+  void guardarPartida();
   void imprimirTablero();
   Box **matrizTablero;
 

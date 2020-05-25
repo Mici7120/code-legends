@@ -21,7 +21,7 @@ void JuegoBase::Main(string configuracionPartida){
   }else{
     configurarCargarPartida();
   }
-  int opcion = 1;
+  int opcion = 0;
 
   do{
     system("clear");
@@ -29,38 +29,44 @@ void JuegoBase::Main(string configuracionPartida){
     cout << "Vida de la torreta: " << tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta;
     cout << "\nTurno del Jugador " << Turno << endl;
 
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
     
-    if(Turno == 1){
-      Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
-      Turno = 2;
-      }else{
-        Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
-        Turno = 1;
-      }
-  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0);
-
-  system("clear");
-  cout << "La partida ha terminado\n";
-  if(tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0){
-    cout << "Gano el ejercito: ";
-    if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
-      cout << "1\n";
-      }else{
-        cout << "2\n";
+    cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n0.Guardar y Salir";
+    cin >> opcion;
+    if(opcion != 0){
+      if(Turno == 1){
+        Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y, opcion);
+        Turno = 2;
+        }else{
+          Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y, opcion);
+          Turno = 1;
         }
-    }else{
-      cout << "Torreta destruida, gana el ejercito 1\n";
-      }
+    }
+  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0 && opcion != 0);
 
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+  if(opcion != 0){
+    system("clear");
+    cout << "La partida ha terminado\n";
+    if(tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0){
+      cout << "Gano el ejercito: ";
+      if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
+        cout << "1\n";
+        }else{
+          cout << "2\n";
+          }
+      }else{
+        cout << "Torreta destruida, gana el ejercito 1\n";
+        }
 
-  cout << "\n\nVolver al Menu\n";
-  cin >> opcion;
-  system("clear");
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
 
+    cout << "\n\nVolver al Menu\n";
+    cin >> opcion;
+    system("clear");
+  }
+  tableroDeJuego.guardarPartida();
 }
 /*!< */
 
@@ -79,19 +85,14 @@ void JuegoBase::sorteoTurno(){
 }
 /*!< Elige al jugador que hará la primer jugada en la partida*/
 
-void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
+void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY, int opcion){
   vector<float> vidas; //Vector de todas las vidas
   float peorVidaLocal = 0.0; //Se inicializa la peor vida en 0.0
 
-  cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
-
-  int opcionMovimiento;
   bool movimientoCorrecto = false;
 
   while(movimientoCorrecto == false){
-    
-    cin >> opcionMovimiento;
-    switch (opcionMovimiento){
+    switch (opcion){
 
       case 1: //Arriba
       if(coordeX != 0){

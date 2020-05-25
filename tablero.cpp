@@ -114,6 +114,20 @@ void Tablero::cargarPartida(){
 }
 /*!< Lee el archivo y guarda su determinada información en cada uno de los boxes */
 
+void Tablero::guardarPartida(){
+  ofstream guardarPartida;
+  guardarPartida.open("cargarPartida.txt");
+  guardarPartida << turnoInicial << " |";
+  for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
+    guardarPartida << endl;
+    for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
+      guardarPartida << matrizTablero[coordenadasX][coordenadasY].getID() << " |";
+    }
+  }
+
+  guardarPartida.close();
+}
+
 void Tablero::imprimirTablero(){
   for(int y = 0; y <= 9; y ++){
     for(int x = 0; x <= 9; x ++){
