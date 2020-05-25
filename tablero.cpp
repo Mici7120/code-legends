@@ -17,6 +17,7 @@ void Tablero::setMatrizTablero(){
     *(matrizTablero + i) = new Box[10];
   }
 }
+/*< Crea los box del tablero */
 
 void Tablero::nuevaPartida(){
   setMatrizTablero();
@@ -65,6 +66,8 @@ void Tablero::nuevaPartida(){
   }
   configuracion.close();
 }
+/*< Carga los valores iniciales para una nueva partida */
+
 
 void Tablero::cargarPartida(){
   setMatrizTablero();
@@ -109,8 +112,8 @@ void Tablero::cargarPartida(){
   //Se cierra el archivo plano
   configuracion.close();
 }
+/*< Lee el archivo y guarda su determinada información en cada uno de los boxes */
 
-//Recorre la matriz del tablero e imprime sus valores, "1" para ejercito 1, "2" para ejercito 2 y "9" para la torreta.
 void Tablero::imprimirTablero(){
   for(int y = 0; y <= 9; y ++){
     for(int x = 0; x <= 9; x ++){
@@ -119,8 +122,8 @@ void Tablero::imprimirTablero(){
     cout << endl << endl;
   }
 }
+/*< Recorre la matriz del tablero e imprime sus valores, "1" para ejercito 1, "2" para ejercito 2 y "9" para la torreta */
 
-//Guarda las coordenadas del ejercito 
 void Tablero::setCoordenadasEjercito(int _Ejercito, int coordenadasX, int coordenadasY){
   if(_Ejercito == 1){
     Ejercito1X = coordenadasX;
@@ -130,3 +133,5 @@ void Tablero::setCoordenadasEjercito(int _Ejercito, int coordenadasX, int coorde
     Ejercito2Y = coordenadasY;
   }
 }
+/*< Guarda las coordenadas del ejercito */
+
