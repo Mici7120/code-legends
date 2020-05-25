@@ -26,7 +26,7 @@ void Box::setTorreta(){
 void Box::daNoTorreta(){
   vidaTorreta --;
 }
-/*< Daño a la torreta */
+/*!< Daño a la torreta */
 
 
 void Box::informacionEjercito(){
@@ -59,19 +59,19 @@ void Box::informacionEjercito(){
     }
   cout << endl;
 }
-/*< Imprime las estadisticas del ejercito */
+/*!< Imprime las estadisticas del ejercito */
   
 void Box::setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago){
   ejercito.setEjercito(numeroLuchadores, numeroTiradores, numeroMago);
 }
-/*< Introduce el numero de unidades de cada tipo de ejercito */
+/*!< Introduce el numero de unidades de cada tipo de ejercito */
 
 void Box::movimientoEjercito(Box boxMovido){
   ejercito.movimientoEjercito(boxMovido.ejercito);
 }
-/*< Mueve el ejercito a otro box */
+/*!< Mueve el ejercito a otro box */
 
 bool Box::Derrotado(){
   return ejercito.derrotado();
 }
-/*< Especifica si ha sido derrotado */
+/*!< Especifica si ha sido derrotado */

@@ -7,13 +7,13 @@ void JuegoBase::configurarNuevaPartida(){
   tableroDeJuego.nuevaPartida();
   sorteoTurno();
 }
-/*< Inicia una nueva partida */
+/*!< Inicia una nueva partida */
 
 void JuegoBase::configurarCargarPartida(){
   tableroDeJuego.cargarPartida();
   Turno = tableroDeJuego.turnoInicial;
 }
-/*< Carga una partida guardada */
+/*!< Carga una partida guardada */
 
 void JuegoBase::Main(string configuracionPartida){
   if(configuracionPartida == "nuevaPartida"){
@@ -62,7 +62,7 @@ void JuegoBase::Main(string configuracionPartida){
   system("clear");
 
 }
-/*< */
+/*!< */
 
 void JuegoBase::sorteoTurno(){
   cout << "Lanzando moneda para decidir turno\n";
@@ -77,7 +77,7 @@ void JuegoBase::sorteoTurno(){
     cin >> opcion;
   }
 }
-/*< Elige al jugador que hará la primer jugada en la partida*/
+/*!< Elige al jugador que hará la primer jugada en la partida*/
 
 void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
   vector<float> vidas; //Vector de todas las vidas
@@ -324,4 +324,4 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
     }
   }
 }
-/*< Compara la dirección hacia donde se va a mover cada ejercito y ejecuta su acción correspondiente de acuerdo a lo que encuentre, ya sea ataque movimiento normal o bloqueo */
+/*!< Compara la dirección hacia donde se va a mover cada ejercito y ejecuta su acción correspondiente de acuerdo a lo que encuentre, ya sea ataque movimiento normal o bloqueo */
