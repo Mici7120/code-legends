@@ -207,17 +207,13 @@ float Ejercito:: obtenerPeorVida(vector<float> vidas){
 /*!< Ordenara todas las vidas de menor a mayor y obtendra la peor vida */
 
 void Ejercito:: restaurarVida(float peorVida){
-  cout << "peor vida: " ; //Imprime la peor vida
-  cout << peorVida << endl;
-  
-  //Imprime las vidas iniciales, es decir las afectadas para verlas antes de ser restauradas
+    //Imprime las vidas iniciales, es decir las afectadas para verlas antes de ser restauradas
     for(int index = 0; index < ejercitoAvatar.size(); index++){
       cout<< ejercitoAvatar[index]->getTipo()<< endl;
       cout<< ejercitoAvatar[index]->getVida()<< endl;
     }
 
     //Restaura la vida y luego las imprime otra vez para ver los valores
-    cout << "RESTAURAR VIDA" << endl;
     for(int index = 0; index < ejercitoAvatar.size(); index++){
       
     //Es la comparacion de todas las vidas de cada tipo de avatar, para saber en que momento esta la peor vida.
