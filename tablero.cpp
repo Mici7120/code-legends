@@ -31,6 +31,7 @@ void Tablero::nuevaPartida(){
   string aux;
 
   while(getline(configuracion, aux, '|')){
+    matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
     if(stoi(aux) == 1 || stoi(aux) == 2){
       //Se ingresan los valores iniciales del ejercito
       int luchadores, tiradores, magos;
@@ -43,19 +44,15 @@ void Tablero::nuevaPartida(){
       cin >> magos;
       cout << endl;
       
-      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
       //Se configura la cantidad de avatares de cada tipo en el Box
-      matrizTablero[coordenadasX][coordenadasY].setEjercito(luchadores, tiradores, magos);
+      matrizTablero[coordenadasX][coordenadasY].setEjercitoInicial(luchadores, tiradores, magos);
 
       //Guarda las coordenadas de los ejercitos
       setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
-    }else{
-      matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
-      if(stoi(aux) == 9){
-        matrizTablero[coordenadasX][coordenadasY].setTorreta();
-        TorretaX = coordenadasX;
-        TorretaY = coordenadasY;
-        }
+    }else if(stoi(aux) == 9){
+      matrizTablero[coordenadasX][coordenadasY].setTorretaInicial();
+      TorretaX = coordenadasX;
+      TorretaY = coordenadasY;
     }
     if(coordenadasX == 9){
       coordenadasX = 0;
@@ -84,35 +81,168 @@ void Tablero::cargarPartida(){
   getline(configuracion, aux, '|');
   turnoInicial = stoi(aux);
 
-  while(getline(configuracion, aux, '|')){
-    if(stoi(aux) == 1 || stoi(aux) == 2){
+  for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
+    for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
+      getline(configuracion, aux, '|');
       matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
-
-      //Se configura la cantidad de avatares de cada tipo en el Box
-      matrizTablero[coordenadasX][coordenadasY].setEjercito(1, 1, 1);
-
-      //Guarda las coordenadas de los ejercitos
-      setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
-      }else{
-        matrizTablero[coordenadasX][coordenadasY].setID(stoi(aux));
-        if(stoi(aux) == 9){
-          matrizTablero[coordenadasX][coordenadasY].setTorreta();
-          TorretaX = coordenadasX;
-          TorretaY = coordenadasY;
-        }
-    }
-    //cout << recorridoRenglon << endl;
-    if(coordenadasX == 9){
-      coordenadasX = 0;
-      coordenadasY ++;
-    }else{
-      coordenadasX ++;
+      if(stoi(aux) == 1 || stoi(aux) == 2){
+        setCoordenadasEjercito(stoi(aux), coordenadasX, coordenadasY);
+      }else if(stoi(aux) == 9){
+        TorretaX = coordenadasX;
+        TorretaY = coordenadasY;
+      }
     }
   }
+
+  vector<float> vector;
+  //ejercito1
+  getline(configuracion, aux, '|');
+  int cantidadLuchadores1 = stoi(aux);
+  for(int i = 0; i < cantidadLuchadores1; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+
+  getline(configuracion, aux, '|');
+  int cantidadTiradores1 = stoi(aux);
+  for(int i = 0; i < cantidadTiradores1; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+
+  getline(configuracion, aux, '|');
+  int cantidadMagos1 = stoi(aux);
+  for(int i = 0; i < cantidadMagos1; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+  matrizTablero[Ejercito1X][Ejercito1Y].ejercito.setEjercito(cantidadLuchadores1, cantidadTiradores1, cantidadMagos1, vector);
+
+  vector.clear();
+  //ejercito2
+  getline(configuracion, aux, '|');
+  int cantidadLuchadores2 = stoi(aux);
+  for(int i = 0; i < cantidadLuchadores2; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+
+  getline(configuracion, aux, '|');
+  int cantidadTiradores2 = stoi(aux);
+  for(int i = 0; i < cantidadTiradores2; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+
+  getline(configuracion, aux, '|');
+  int cantidadMagos2 = stoi(aux);
+  for(int i = 0; i < cantidadMagos2; i++){
+    getline(configuracion, aux, '|');
+    vector.push_back(stof(aux));
+  }
+  matrizTablero[Ejercito2X][Ejercito2Y].ejercito.setEjercito(cantidadLuchadores1, cantidadTiradores1, cantidadMagos1, vector);
+
+  //Valores de Torreta
+  int valoresTorreta [5];
+  for(int i = 0; i < 5; i++){
+    getline(configuracion, aux, '|');
+    valoresTorreta[i] = stoi(aux);
+  }
+  matrizTablero[TorretaX][TorretaY].setTorreta(valoresTorreta);
+
   //Se cierra el archivo plano
   configuracion.close();
 }
 /*!< Lee el archivo y guarda su determinada información en cada uno de los boxes */
+
+void Tablero::guardarPartida(int _Turno){
+  ofstream guardarPartida;
+  guardarPartida.open("cargarPartida.txt");
+
+  //Guarda el turno en la primera linea del archivo
+  guardarPartida << _Turno << " |\n";
+
+  //Guarda la matriz
+  for(int coordenadasY = 0; coordenadasY < 10; coordenadasY ++){
+    guardarPartida << endl;
+    for(int coordenadasX = 0; coordenadasX < 10; coordenadasX ++){
+      guardarPartida << matrizTablero[coordenadasX][coordenadasY].getID() << " |";
+    }
+  }
+  guardarPartida << endl << endl;
+
+  //Guarda la informacion de los vectores
+  int vectorEjercito1 = 0;
+  int vectorEjercito2 = 0;
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadLuchadores() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadLuchadores(); i++){
+    guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
+    vectorEjercito1 ++;
+  }
+  guardarPartida << endl;
+
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadTiradores() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadTiradores(); i++){
+    guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
+    vectorEjercito1 ++;
+  }
+  guardarPartida << endl;
+
+  guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadMagos() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito1X][Ejercito1Y].ejercito.getCantidadMagos(); i++){
+    guardarPartida << matrizTablero[Ejercito1X][Ejercito1Y].ejercito.ejercitoAvatar[vectorEjercito1] -> getVida() << " |";
+    vectorEjercito1 ++;
+  }
+  guardarPartida << endl << endl;
+
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadLuchadores() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadLuchadores(); i++){
+    guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
+    vectorEjercito2 ++;
+  }
+  guardarPartida << endl;
+
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadTiradores() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadTiradores(); i++){
+    guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
+    vectorEjercito2 ++;
+  }
+  guardarPartida << endl;
+
+  guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadMagos() << " |\n";
+  for(int i = 0; i < matrizTablero[Ejercito2X][Ejercito2Y].ejercito.getCantidadMagos(); i++){
+    guardarPartida << matrizTablero[Ejercito2X][Ejercito2Y].ejercito.ejercitoAvatar[vectorEjercito2] -> getVida() << " |";
+    vectorEjercito2 ++;
+  }
+
+  //Guarda la informacion de la torreta
+  guardarPartida << endl << endl << matrizTablero[TorretaX][TorretaY].vidaTorreta << " |\n";
+  if(matrizTablero[TorretaX][TorretaY].Norte){
+    guardarPartida << "1 |\n";
+  }else{
+    guardarPartida << "0 |\n";
+  }
+
+  if(matrizTablero[TorretaX][TorretaY].Sur){
+    guardarPartida << "1 |\n";
+  }else{
+    guardarPartida << "0 |\n";
+  }
+
+  if(matrizTablero[TorretaX][TorretaY].Este){
+    guardarPartida << "1 |\n";
+  }else{
+    guardarPartida << "0 |\n";
+  }
+
+  if(matrizTablero[TorretaX][TorretaY].Oeste){
+    guardarPartida << "1 |";
+  }else{
+    guardarPartida << "0 |";
+  }
+
+  guardarPartida.close();
+}
 
 void Tablero::imprimirTablero(){
   for(int y = 0; y <= 9; y ++){
@@ -134,4 +264,3 @@ void Tablero::setCoordenadasEjercito(int _Ejercito, int coordenadasX, int coorde
   }
 }
 /*!< Guarda las coordenadas del ejercito */
-

@@ -12,14 +12,22 @@ int Box::getID(){
   return ID;
 }
 
-
-void Box::setTorreta(){
+void Box::setTorretaInicial(){
   Torreta = true;
   Norte = true;
   Sur = true;
   Este = true;
   Oeste = true;
   vidaTorreta = 4;
+}
+
+void Box::setTorreta(int _valoresTorreta[5]){
+  Torreta = true;
+  vidaTorreta = _valoresTorreta[0];
+  Norte = _valoresTorreta[1];
+  Sur = _valoresTorreta[2];
+  Este = _valoresTorreta[3];
+  Oeste = _valoresTorreta[4];
   }
 /*!< Configura el box como una torreta, con sus valores iniciales */
 
@@ -61,10 +69,14 @@ void Box::informacionEjercito(){
 }
 /*!< Imprime las estadisticas del ejercito */
   
-void Box::setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago){
-  ejercito.setEjercito(numeroLuchadores, numeroTiradores, numeroMago);
+void Box::setEjercitoInicial(int numeroLuchadores, int numeroTiradores, int numeroMago){
+  ejercito.setEjercitoInicial(numeroLuchadores, numeroTiradores, numeroMago);
 }
 /*!< Introduce el numero de unidades de cada tipo de ejercito */
+
+void Box::setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago, vector<float> vidas){
+  ejercito.setEjercito(numeroLuchadores, numeroTiradores, numeroMago, vidas);
+}
 
 void Box::movimientoEjercito(Box boxMovido){
   ejercito.movimientoEjercito(boxMovido.ejercito);

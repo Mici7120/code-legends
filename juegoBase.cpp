@@ -21,7 +21,7 @@ void JuegoBase::Main(string configuracionPartida){
   }else{
     configurarCargarPartida();
   }
-  int opcion = 1;
+  int opcion = 0;
 
   do{
     system("clear");
@@ -29,38 +29,42 @@ void JuegoBase::Main(string configuracionPartida){
     cout << "Vida de la torreta: " << tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta;
     cout << "\nTurno del Jugador " << Turno << endl;
 
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
     
+    cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n0. Guardar y Salir\n";
     if(Turno == 1){
-      Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y);
+      Movimiento(Turno, tableroDeJuego.Ejercito1X, tableroDeJuego.Ejercito1Y, opcion);
       Turno = 2;
-      }else{
-        Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y);
-        Turno = 1;
-      }
-  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0);
-
-  system("clear");
-  cout << "La partida ha terminado\n";
-  if(tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0){
-    cout << "Gano el ejercito: ";
-    if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
-      cout << "1\n";
-      }else{
-        cout << "2\n";
-        }
     }else{
-      cout << "Torreta destruida, gana el ejercito 1\n";
-      }
+      Movimiento(Turno, tableroDeJuego.Ejercito2X, tableroDeJuego.Ejercito2Y, opcion);
+      Turno = 1;
+    }
+  }while(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].ejercito.derrotado() == false && tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0 && opcion != 0);
 
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
-  tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
+  if(opcion != 0){
+    system("clear");
+    cout << "La partida ha terminado\n";
+    if(tableroDeJuego.matrizTablero[tableroDeJuego.TorretaX][tableroDeJuego.TorretaY].vidaTorreta != 0){
+      cout << "Gano el ejercito: ";
+      if(tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y] .ejercito.derrotado() == false){
+        cout << "1\n";
+        }else{
+          cout << "2\n";
+          }
+      }else{
+        cout << "Torreta destruida, gana el ejercito 1\n";
+        }
 
-  cout << "\n\nVolver al Menu\n";
-  cin >> opcion;
-  system("clear");
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito1X][tableroDeJuego.Ejercito1Y].informacionEjercito();
+    tableroDeJuego.matrizTablero[tableroDeJuego.Ejercito2X][tableroDeJuego.Ejercito2Y].informacionEjercito();
 
+    cout << "\n\nVolver al Menu\n";
+    cin >> opcion;
+    system("clear");
+  }else{
+    tableroDeJuego.guardarPartida(Turno);
+  }
 }
 /*!< */
 
@@ -79,22 +83,17 @@ void JuegoBase::sorteoTurno(){
 }
 /*!< Elige al jugador que hará la primer jugada en la partida*/
 
-void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
+void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY, int &opcion){
   vector<float> vidas; //Vector de todas las vidas
-  float peorVidaLocal = 0.0; //Se inicializa la peor vida en 0.0
+  float peorVidaLocal = 0; //Se inicializa la peor vida en 0
 
-  cout << "1. Arriba\n2. Abajo\n3. Derecha\n4. Izquierda\n";
-
-  int opcionMovimiento;
   bool movimientoCorrecto = false;
 
   while(movimientoCorrecto == false){
-    
-    cin >> opcionMovimiento;
-    switch (opcionMovimiento){
-
+    cin >> opcion;
+    switch (opcion){
       case 1: //Arriba
-      if(coordeX != 0){
+      if(coordeY != 0){
         switch(tableroDeJuego.matrizTablero[coordeX][coordeY - 1].getID()){
           case 0:
             tableroDeJuego.matrizTablero[coordeX][coordeY - 1].setID(_Ejercito);
@@ -152,7 +151,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       break;
 
       case 2: //Abajo
-      if(coordeX != 9){
+      if(coordeY != 9){
         switch(tableroDeJuego.matrizTablero[coordeX][coordeY + 1].getID()){
             case 0:
               tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
@@ -174,7 +173,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
 
              tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito.restaurarVida(peorVidaLocal);
 
-//Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
+        //Sirve para hacer los movimientos del ejercito y se pueda comer el Bonus.
           tableroDeJuego.matrizTablero[coordeX][coordeY + 1].setID(_Ejercito);
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           tableroDeJuego.matrizTablero[coordeX][coordeY + 1].ejercito.movimientoEjercito(tableroDeJuego.matrizTablero[coordeX][coordeY].ejercito);
@@ -207,7 +206,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       break;
 
       case 3: //Derecha
-      if(coordeY != 9){
+      if(coordeX != 9){
         switch(tableroDeJuego.matrizTablero[coordeX + 1][coordeY].getID()){
             case 0:
               tableroDeJuego.matrizTablero[coordeX + 1][coordeY].setID(_Ejercito);
@@ -258,7 +257,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       break;
 
       case 4: //Izquierda
-      if(coordeY != 0){
+      if(coordeX != 0){
         switch(tableroDeJuego.matrizTablero[coordeX - 1][coordeY].getID()){
             case 0:
               tableroDeJuego.matrizTablero[coordeX - 1][coordeY].setID(_Ejercito);
@@ -291,9 +290,7 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
           tableroDeJuego.matrizTablero[coordeX][coordeY].setID(0);
           coordeX --;
           movimientoCorrecto = true;
-
-             break;
-
+            break;
 
             case 9:
               if(_Ejercito == 1){
@@ -317,10 +314,15 @@ void JuegoBase::Movimiento(int _Ejercito, int &coordeX, int &coordeY){
       break;
 
       default:
+      movimientoCorrecto = true;
       break;
     }
-  if(movimientoCorrecto == false){
-    cout << "Movimiento Invalido\n";
+    if(movimientoCorrecto == false){
+      cout << "Movimiento Invalido\n";
+    }else if(Turno == 1){
+      Turno = 2;
+    }else{
+      Turno = 1;
     }
   }
 }
