@@ -8,7 +8,7 @@ defender la Torreta, en batalla se perderán muchas vidas!
 
 La configuracion usada para compilar el codigo fue la siguiente:
 
-clang++-7 -pthread -o main main.cpp avatar.cpp box.cpp ejercito.cpp tablero.cpp menu.cpp && ./main
+g++ -o main main.cpp avatar.cpp box.cpp ejercito.cpp tablero.cpp menu.cpp
 
 #Ejecutar
 
