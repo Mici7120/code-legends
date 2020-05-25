@@ -16,8 +16,9 @@ class Tablero{
   Box **matrizTablero;
 
   int turnoInicial;
+  /*!< Turno del Jugador al iniciar la partida */
+
   int Ejercito1X, Ejercito1Y, Ejercito2X, Ejercito2Y;
-  /*!< Posición de los ejercitos en la matriz */
   void setCoordenadasEjercito(int _Ejercito, int X, int Y);
 
   int TorretaX, TorretaY;
