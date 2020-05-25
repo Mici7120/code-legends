@@ -12,7 +12,7 @@ int Box::getID(){
   return ID;
 }
 
-//Configura el box como una torreta, con sus valores iniciales
+
 void Box::setTorreta(){
   Torreta = true;
   Norte = true;
@@ -21,13 +21,14 @@ void Box::setTorreta(){
   Oeste = true;
   vidaTorreta = 4;
   }
+/*!< Configura el box como una torreta, con sus valores iniciales */
 
-//
 void Box::daNoTorreta(){
   vidaTorreta --;
 }
+/*< Daño a la torreta */
 
-//Imprime las estadisticas del ejercito
+
 void Box::informacionEjercito(){
   cout << "\nEstado Ejercito " << getID() << endl;
   cout << "\nTotal Luchadores: " << ejercito.getCantidadLuchadores();
@@ -58,25 +59,19 @@ void Box::informacionEjercito(){
     }
   cout << endl;
 }
+/*< Imprime las estadisticas del ejercito */
   
 void Box::setEjercito(int numeroLuchadores, int numeroTiradores, int numeroMago){
   ejercito.setEjercito(numeroLuchadores, numeroTiradores, numeroMago);
 }
+/*< Introduce el numero de unidades de cada tipo de ejercito */
 
 void Box::movimientoEjercito(Box boxMovido){
   ejercito.movimientoEjercito(boxMovido.ejercito);
-
-  /*
-  setEjercito(boxMovido.ejercito.getCantidadLuchadores(),boxMovido.ejercito.getCantidadTiradores(),boxMovido.ejercito.getCantidadMagos());
-  ejercito.ejercitoAvatar.clear();
-  for(int i = 0; i < 2; i++){
-    ejercito.ejercitoAvatar.push_back(new Avatar("mago"));
-  }
-  boxMovido.ejercito.ejercitoAvatar.clear();
-  */
 }
+/*< Mueve el ejercito a otro box */
 
 bool Box::Derrotado(){
   return ejercito.derrotado();
 }
-// Aqui debes hacer lo de sumas de habilidades, sin tocar la clase avatar ni la clase ejercito
+/*< Especifica si ha sido derrotado */
