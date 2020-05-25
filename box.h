@@ -12,11 +12,11 @@ class Box{
     int getID();
 
     bool Torreta;
-    /*< Posición de la torreta */
+    /*!< Posición de la torreta */
     int vidaTorreta;
-    /*< Puntos de gole de la torreta (vida) */
+    /*!< Puntos de gole de la torreta (vida) */
     bool Norte, Sur, Este, Oeste;
-    /*< Posición de los escudos de la torreta */
+    /*!< Posición de los escudos de la torreta */
     void setTorreta();
     void daNoTorreta();
     

@@ -48,7 +48,7 @@ void Menu::MenuPrincipal(){
   }
   while(opcion != 4);
 }
-/*< Ejecuta una serie de metodos dependiendo de la opción que se elija */
+/*!< Ejecuta una serie de metodos dependiendo de la opción que se elija */
 
 
 
@@ -68,4 +68,4 @@ void Menu::Instrucciones(){
   }
   system("clear");
 }
-/*< Carga las instrucciones del archivo "Instrucciones.txt" */
+/*!< Carga las instrucciones del archivo "Instrucciones.txt" */

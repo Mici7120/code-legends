@@ -16,11 +16,11 @@ class Tablero{
 
   int turnoInicial;
   int Ejercito1X, Ejercito1Y, Ejercito2X, Ejercito2Y;
-  /* Posición de los ejercitos en la matriz */
+  /*!< Posición de los ejercitos en la matriz */
   void setCoordenadasEjercito(int _Ejercito, int X, int Y);
 
   int TorretaX, TorretaY;
-  /* Posición de la torreta en la matriz */
+  /*!< Posición de la torreta en la matriz */
 
 };
 

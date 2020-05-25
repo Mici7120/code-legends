@@ -14,7 +14,7 @@ int Ejercito::getCantidadLuchadores(){
   }
   return Luchadores;
 }
-/*< Esta implementacion nos dara la cantidad total de los luchadores */
+/*!< Esta implementacion nos dara la cantidad total de los luchadores */
 
 int Ejercito::getCantidadTiradores(){
   int Tiradores = 0;
@@ -25,7 +25,7 @@ int Ejercito::getCantidadTiradores(){
   }
   return Tiradores;
 }
-/*< Esta implementacion nos dara la cantidad total de los tiradores */
+/*!< Esta implementacion nos dara la cantidad total de los tiradores */
 
 int Ejercito::getCantidadMagos(){
   int Magos = 0;
@@ -36,7 +36,7 @@ int Ejercito::getCantidadMagos(){
   }
   return Magos;
 }
-/*< Esta implementacion nos dara la cantidad total de los magos */
+/*!< Esta implementacion nos dara la cantidad total de los magos */
 
 void Ejercito::setEjercito(int luchadores, int tiradores, int magos){
   ejercitoAvatar.clear();
@@ -54,7 +54,7 @@ void Ejercito::setEjercito(int luchadores, int tiradores, int magos){
     }
   cantidadEjercito = luchadores + tiradores + magos;
 }
-/*< Setea el ejercito con el fin de modificar sus valores */
+/*!< Setea el ejercito con el fin de modificar sus valores */
 
 int Ejercito::soldadosVivos(){
   int numeroDeSoldados = 0;
@@ -177,7 +177,7 @@ void Ejercito::movimientoEjercito(Ejercito ejercitoMovido){
   return ejercitoCopia[0];
 
 }
-/*< Cuenta el numero de soldados vivos */
+/*!< Cuenta el numero de soldados vivos */
 
 void Ejercito:: restaurarVida(float peorVida){
 
@@ -223,4 +223,4 @@ void Ejercito:: restaurarVida(float peorVida){
       }
 
 }
-/*< Restaura al avatar con la vida  más baja */
+/*!< Restaura al avatar con la vida  más baja */
